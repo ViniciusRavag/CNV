@@ -11,22 +11,23 @@
             box-sizing: border-box;
         }
         :root {
-            --primary: #4f46e5;
-            --primary-light: #818cf8;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-main: #f8fafc;
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --secondary: #7c3aed;
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --bg-main: #f9fafb;
             --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
+            --bg-card-hover: #f3f4f6;
+            --text-primary: #111827;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-main) 0%, #e2e8f0 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
@@ -39,33 +40,34 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 20px;
+            background-color: var(--primary);
+            border-radius: 16px;
             margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.2);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
             color: white;
         }
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-weight: 700;
         }
         header p {
             font-size: 1.1rem;
             opacity: 0.95;
+            font-weight: 500;
         }
         .card {
             background: var(--bg-card);
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
         .step-indicator {
             display: flex;
@@ -79,8 +81,8 @@
             top: 20px;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--bg-card-hover);
+            height: 2px;
+            background: var(--border);
             z-index: 0;
         }
         .step {
@@ -92,32 +94,35 @@
             flex: 1;
         }
         .step-circle {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: var(--bg-card-hover);
+            background: var(--bg-card);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 10px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             color: var(--text-primary);
+            border: 2px solid var(--border);
         }
         .step.active .step-circle {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
-            transform: scale(1.1);
+            background: var(--primary);
+            border-color: var(--primary);
             color: white;
+            transform: scale(1.05);
         }
         .step.completed .step-circle {
             background: var(--success);
+            border-color: var(--success);
             color: white;
         }
         .step-label {
             font-size: 0.85rem;
             text-align: center;
             color: var(--text-muted);
+            font-weight: 500;
         }
         .step.active .step-label {
             color: var(--text-primary);
@@ -125,7 +130,7 @@
         }
         .content-section {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
         }
         .content-section.active {
             display: block;
@@ -133,7 +138,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(12px);
             }
             to {
                 opacity: 1;
@@ -141,119 +146,81 @@
             }
         }
         .btn {
-            padding: 14px 32px;
+            padding: 12px 28px;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             color: white;
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
         }
         .btn-secondary {
             background: var(--bg-card-hover);
             color: var(--text-primary);
+            border: 1px solid var(--border);
         }
         .btn-secondary:hover {
-            background: #e2e8f0;
+            background: #e5e7eb;
         }
         .checkbox-container {
             display: flex;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding: 16px;
             background: var(--bg-card-hover);
             border-radius: 12px;
             margin: 20px 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease;
         }
         .checkbox-container:hover {
-            background: #e2e8f0;
+            background: #e5e7eb;
         }
         .checkbox-container input[type="checkbox"] {
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
             cursor: pointer;
+            accent-color: var(--primary);
         }
-        .video-container {
-            background: var(--bg-main);
-            border-radius: 12px;
+        .info-box {
+            background: var(--primary-light);
+            border-left: 3px solid var(--primary);
             padding: 20px;
+            border-radius: 12px;
             margin: 20px 0;
-            text-align: center;
-            border: 1px solid #e2e8f0;
+            color: var(--text-primary);
         }
-        .video-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(236, 72, 153, 0.1));
+        .info-box h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .alert {
+            padding: 20px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-        .practice-field {
             margin: 20px 0;
-        }
-        .practice-field textarea {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid #cbd5e1;
-            background: var(--bg-main);
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 120px;
-            transition: border-color 0.3s ease;
-        }
-        .practice-field textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        .feedback {
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
-            display: none;
-            animation: slideIn 0.3s ease;
-        }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        .feedback.success {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--success);
-            display: block;
+            background: #fee2e2;
+            border-left: 3px solid var(--danger);
             color: var(--text-primary);
         }
-        .feedback.warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 4px solid var(--warning);
-            display: block;
-            color: var(--text-primary);
+        .alert h3 {
+            margin-bottom: 12px;
+            color: var(--danger);
+            font-weight: 600;
         }
         form {
             display: grid;
@@ -273,60 +240,61 @@
         .form-group textarea {
             padding: 12px;
             border-radius: 8px;
-            border: 2px solid #cbd5e1;
-            background: var(--bg-main);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
             color: var(--text-primary);
             font-size: 1rem;
             font-family: inherit;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.2s ease;
         }
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         .slider-container {
             padding: 20px 0;
         }
         .slider {
             width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #cbd5e1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
             outline: none;
             -webkit-appearance: none;
         }
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
         }
         .slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             cursor: pointer;
             border: none;
         }
         .slider-value {
             text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-top: 10px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 12px;
             color: var(--primary);
         }
         .button-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 24px;
             flex-wrap: wrap;
         }
         .admin-panel {
@@ -337,18 +305,18 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
         .stat-card {
             background: var(--bg-card);
-            padding: 25px;
+            padding: 24px;
             border-radius: 12px;
             text-align: center;
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            border-left: 3px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
         }
         .stat-card.danger {
             border-left-color: var(--danger);
@@ -360,14 +328,15 @@
             border-left-color: var(--success);
         }
         .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
             color: var(--text-primary);
         }
         .stat-label {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
         .reports-table {
             width: 100%;
@@ -376,61 +345,65 @@
         }
         .reports-table th,
         .reports-table td {
-            padding: 15px;
+            padding: 14px 12px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border);
         }
         .reports-table th {
             background: var(--bg-card-hover);
             font-weight: 600;
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         .reports-table tr:hover {
             background: var(--bg-card-hover);
         }
         .badge {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
+            text-transform: uppercase;
         }
         .badge.high {
-            background: rgba(239, 68, 68, 0.1);
+            background: #fee2e2;
             color: var(--danger);
         }
         .badge.medium {
-            background: rgba(245, 158, 11, 0.1);
+            background: #fef3c7;
             color: var(--warning);
         }
         .badge.low {
-            background: rgba(16, 185, 129, 0.1);
+            background: #dcfce7;
             color: var(--success);
         }
         .filter-bar {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
         .filter-bar select {
-            padding: 10px 15px;
+            padding: 10px 14px;
             border-radius: 8px;
-            border: 2px solid #cbd5e1;
+            border: 1px solid var(--border);
             background: var(--bg-card);
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
+            min-width: 180px;
         }
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8rem;
+                font-size: 1.75rem;
             }
             .step-indicator {
                 flex-wrap: wrap;
+                gap: 16px;
             }
             .step {
-                margin-bottom: 20px;
+                margin-bottom: 16px;
             }
             .button-group {
                 flex-direction: column;
@@ -443,32 +416,41 @@
             }
             .reports-table th,
             .reports-table td {
-                padding: 10px 5px;
+                padding: 12px 8px;
+            }
+            .filter-bar {
+                flex-direction: column;
+            }
+            .filter-bar select {
+                min-width: auto;
+                width: 100%;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
-        .alert {
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            background: rgba(239, 68, 68, 0.08);
-            border-left: 4px solid var(--danger);
-            color: var(--text-primary);
+        ul {
+            list-style: none;
+            padding-left: 0;
         }
-        .alert h3 {
-            margin-bottom: 10px;
+        ul li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .success-list li::before {
+            color: var(--success);
+        }
+        .danger-list li::before {
             color: var(--danger);
-        }
-        .info-box {
-            background: rgba(79, 70, 229, 0.08);
-            border-left: 4px solid var(--primary);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            color: var(--text-primary);
-        }
-        .info-box h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -533,11 +515,6 @@
                     <p><strong>Mantenha contato visual:</strong> Demonstre presença total.</p>
                     <p><strong>Não interrompa:</strong> Deixe seu filho(a) terminar de falar.</p>
                 </div>
-                <div class="video-container">
-                    <div class="video-placeholder">🎬</div>
-                    <p style="color: var(--text-muted);">Exemplo de postura e escuta atenta</p>
-                    <p style="margin-top: 10px;">Uma conversa acolhedora cria confiança e abertura emocional.</p>
-                </div>
                 <div class="alert">
                     <h3>⚠️ Evite estas reações:</h3>
                     <ul style="margin-left: 20px;">
@@ -561,28 +538,21 @@
                     <p>Elas permitem que seu filho(a) compartilhe no próprio ritmo, sem sentir-se pressionado ou interrogado.</p>
                 </div>
                 <h3 style="margin: 30px 0 15px 0;">❌ Evite perguntas diretas:</h3>
-                <ul style="margin-left: 20px; color: var(--danger);">
+                <ul class="danger-list" style="margin-left: 20px;">
                     <li>"Você está sofrendo bullying?"</li>
                     <li>"Alguém está te maltratando?"</li>
                     <li>"Por que você não tem amigos?"</li>
                 </ul>
                 <h3 style="margin: 30px 0 15px 0;">✅ Prefira perguntas abertas:</h3>
-                <ul style="margin-left: 20px; color: var(--success);">
+                <ul class="success-list" style="margin-left: 20px;">
                     <li>"O que tem sido mais chato na escola ultimamente?"</li>
                     <li>"Como você tem se sentido com seus colegas?"</li>
                     <li>"Tem algo que você gostaria de mudar na escola?"</li>
                     <li>"Com quem você mais gosta de conversar no recreio?"</li>
                 </ul>
-                <div class="practice-field">
-                    <h3 style="margin-bottom: 15px;">🎯 Campo de Prática</h3>
-                    <p style="margin-bottom: 10px; color: var(--text-secondary);">Digite a pergunta que você pretende fazer ao seu filho(a):</p>
-                    <textarea id="practice-question" placeholder="Ex: Como tem sido seu dia na escola?"></textarea>
-                    <div id="question-feedback" class="feedback"></div>
-                </div>
                 <div class="button-group">
                     <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
-                    <button class="btn btn-primary" onclick="analyzeQuestion()">Analisar Pergunta</button>
-                    <button class="btn btn-primary" id="step3-next" style="display: none;" onclick="nextStep()">Avançar</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Avançar</button>
                 </div>
             </div>
             <!-- Step 4 -->
@@ -604,7 +574,7 @@
                     </ol>
                 </div>
                 <h3 style="margin: 30px 0 15px 0;">✅ Frases que ajudam:</h3>
-                <ul style="margin-left: 20px; color: var(--success); line-height: 2;">
+                <ul class="success-list" style="margin-left: 20px; line-height: 2;">
                     <li>"Você não está sozinho(a) nisso."</li>
                     <li>"Foi muito corajoso você me contar."</li>
                     <li>"Vamos encontrar uma solução juntos."</li>
@@ -803,9 +773,9 @@
             document.getElementById('filter-status').addEventListener('change', filterReports);
         }
         function getEmotionColor(value) {
-            if (value >= 8) return '#ef4444';
-            if (value >= 5) return '#f59e0b';
-            return '#10b981';
+            if (value >= 8) return '#dc2626';
+            if (value >= 5) return '#d97706';
+            return '#16a34a';
         }
         function nextStep() {
             if (currentStep < 4) {
@@ -833,32 +803,6 @@
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        }
-        function analyzeQuestion() {
-            const question = document.getElementById('practice-question').value.trim();
-            const feedback = document.getElementById('question-feedback');
-            if (!question) {
-                feedback.className = 'feedback warning';
-                feedback.innerHTML = '<strong>⚠️ Atenção:</strong> Por favor, digite uma pergunta para analisar.';
-                return;
-            }
-            // Check for closed questions (yes/no answers)
-            const closedQuestions = ['você está', 'você é', 'você sofre', 'alguém te', 'tem alguém'];
-            const isClosed = closedQuestions.some(phrase => question.toLowerCase().includes(phrase));
-            // Check for open questions
-            const openWords = ['como', 'o que', 'qual', 'quais', 'conte', 'descreva', 'me fale'];
-            const isOpen = openWords.some(word => question.toLowerCase().includes(word));
-            if (isClosed || question.endsWith('?') && (question.toLowerCase().includes('você') || question.toLowerCase().includes('voce'))) {
-                if (!isOpen) {
-                    feedback.className = 'feedback warning';
-                    feedback.innerHTML = '<strong>⚠️ Atenção:</strong> Sua pergunta parece muito direta ou fechada. Tente reformular usando "Como...", "O que..." ou "Conte-me sobre...".';
-                    document.getElementById('step3-next').style.display = 'none';
-                    return;
-                }
-            }
-            feedback.className = 'feedback success';
-            feedback.innerHTML = '<strong>✅ Ótima pergunta!</strong> Esta é uma pergunta aberta que permite que seu filho(a) compartilhe mais livremente.';
-            document.getElementById('step3-next').style.display = 'inline-block';
         }
         function completeOnboarding() {
             completedOnboardings++;
@@ -953,7 +897,7 @@
                     <td>${getReasonLabel(report.contactReason)}</td>
                     <td><span class="badge ${report.riskLevel}">${getRiskLabel(report.riskLevel)}</span></td>
                     <td>
-                        <select onchange="updateReportStatus(${report.id}, this.value)" style="padding: 5px; border-radius: 5px; background: var(--bg-main); color: var(--text-primary); border: 1px solid #cbd5e1;">
+                        <select onchange="updateReportStatus(${report.id}, this.value)" style="padding: 5px; border-radius: 5px; background: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border);">
                             <option value="pending" ${report.status === 'pending' ? 'selected' : ''}>Pendente</option>
                             <option value="in-progress" ${report.status === 'in-progress' ? 'selected' : ''}>Em Acompanhamento</option>
                             <option value="closed" ${report.status === 'closed' ? 'selected' : ''}>Fechado</option>
