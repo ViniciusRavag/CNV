@@ -10,77 +10,69 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
             --secondary: #ec4899;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
             --text-muted: #94a3b8;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-main) 0%, #1e293b 100%);
+            background: linear-gradient(135deg, var(--bg-main) 0%, #e2e8f0 100%);
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
         header {
             text-align: center;
             padding: 40px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 20px;
             margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.2);
+            color: white;
         }
-
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
-
         header p {
             font-size: 1.1rem;
             opacity: 0.95;
         }
-
         .card {
             background: var(--bg-card);
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
         }
-
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
-
         .step-indicator {
             display: flex;
             justify-content: space-between;
             margin-bottom: 40px;
             position: relative;
         }
-
         .step-indicator::before {
             content: '';
             position: absolute;
@@ -91,7 +83,6 @@
             background: var(--bg-card-hover);
             z-index: 0;
         }
-
         .step {
             display: flex;
             flex-direction: column;
@@ -100,7 +91,6 @@
             z-index: 1;
             flex: 1;
         }
-
         .step-circle {
             width: 40px;
             height: 40px;
@@ -112,38 +102,34 @@
             font-weight: bold;
             margin-bottom: 10px;
             transition: all 0.3s ease;
+            color: var(--text-primary);
         }
-
         .step.active .step-circle {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
             transform: scale(1.1);
+            color: white;
         }
-
         .step.completed .step-circle {
             background: var(--success);
+            color: white;
         }
-
         .step-label {
             font-size: 0.85rem;
             text-align: center;
             color: var(--text-muted);
         }
-
         .step.active .step-label {
             color: var(--text-primary);
             font-weight: 600;
         }
-
         .content-section {
             display: none;
             animation: fadeIn 0.5s ease;
         }
-
         .content-section.active {
             display: block;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -154,7 +140,6 @@
                 transform: translateY(0);
             }
         }
-
         .btn {
             padding: 14px 32px;
             border: none;
@@ -166,27 +151,22 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
-
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
         }
-
         .btn-secondary {
             background: var(--bg-card-hover);
             color: var(--text-primary);
         }
-
         .btn-secondary:hover {
-            background: var(--bg-card);
+            background: #e2e8f0;
         }
-
         .checkbox-container {
             display: flex;
             align-items: center;
@@ -197,47 +177,43 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .checkbox-container:hover {
-            background: var(--bg-card);
+            background: #e2e8f0;
         }
-
         .checkbox-container input[type="checkbox"] {
             width: 24px;
             height: 24px;
             margin-right: 15px;
             cursor: pointer;
         }
-
         .video-container {
             background: var(--bg-main);
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
             text-align: center;
+            border: 1px solid #e2e8f0;
         }
-
         .video-placeholder {
             width: 100%;
             height: 300px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(236, 72, 153, 0.1));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             margin-bottom: 15px;
+            color: var(--text-muted);
         }
-
         .practice-field {
             margin: 20px 0;
         }
-
         .practice-field textarea {
             width: 100%;
             padding: 15px;
             border-radius: 12px;
-            border: 2px solid var(--bg-card-hover);
+            border: 2px solid #cbd5e1;
             background: var(--bg-main);
             color: var(--text-primary);
             font-size: 1rem;
@@ -246,12 +222,10 @@
             min-height: 120px;
             transition: border-color 0.3s ease;
         }
-
         .practice-field textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
-
         .feedback {
             padding: 15px;
             border-radius: 12px;
@@ -259,7 +233,6 @@
             display: none;
             animation: slideIn 0.3s ease;
         }
-
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -270,68 +243,60 @@
                 transform: translateX(0);
             }
         }
-
         .feedback.success {
-            background: rgba(16, 185, 129, 0.2);
+            background: rgba(16, 185, 129, 0.1);
             border-left: 4px solid var(--success);
             display: block;
+            color: var(--text-primary);
         }
-
         .feedback.warning {
-            background: rgba(245, 158, 11, 0.2);
+            background: rgba(245, 158, 11, 0.1);
             border-left: 4px solid var(--warning);
             display: block;
+            color: var(--text-primary);
         }
-
         form {
             display: grid;
             gap: 20px;
         }
-
         .form-group {
             display: flex;
             flex-direction: column;
         }
-
         .form-group label {
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--text-secondary);
         }
-
         .form-group input,
         .form-group select,
         .form-group textarea {
             padding: 12px;
             border-radius: 8px;
-            border: 2px solid var(--bg-card-hover);
+            border: 2px solid #cbd5e1;
             background: var(--bg-main);
             color: var(--text-primary);
             font-size: 1rem;
             font-family: inherit;
             transition: border-color 0.3s ease;
         }
-
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
-
         .slider-container {
             padding: 20px 0;
         }
-
         .slider {
             width: 100%;
             height: 8px;
             border-radius: 4px;
-            background: var(--bg-card-hover);
+            background: #cbd5e1;
             outline: none;
             -webkit-appearance: none;
         }
-
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -340,9 +305,8 @@
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
         }
-
         .slider::-moz-range-thumb {
             width: 24px;
             height: 24px;
@@ -351,7 +315,6 @@
             cursor: pointer;
             border: none;
         }
-
         .slider-value {
             text-align: center;
             font-size: 2rem;
@@ -359,7 +322,6 @@
             margin-top: 10px;
             color: var(--primary);
         }
-
         .button-group {
             display: flex;
             gap: 15px;
@@ -367,76 +329,65 @@
             margin-top: 30px;
             flex-wrap: wrap;
         }
-
         .admin-panel {
             display: none;
         }
-
         .admin-panel.active {
             display: block;
         }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-
         .stat-card {
             background: var(--bg-card);
             padding: 25px;
             border-radius: 12px;
             text-align: center;
             border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
         }
-
         .stat-card.danger {
             border-left-color: var(--danger);
         }
-
         .stat-card.warning {
             border-left-color: var(--warning);
         }
-
         .stat-card.success {
             border-left-color: var(--success);
         }
-
         .stat-value {
             font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 5px;
+            color: var(--text-primary);
         }
-
         .stat-label {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-
         .reports-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
         .reports-table th,
         .reports-table td {
             padding: 15px;
             text-align: left;
-            border-bottom: 1px solid var(--bg-card-hover);
+            border-bottom: 1px solid #e2e8f0;
         }
-
         .reports-table th {
             background: var(--bg-card-hover);
             font-weight: 600;
             color: var(--text-secondary);
         }
-
         .reports-table tr:hover {
             background: var(--bg-card-hover);
         }
-
         .badge {
             display: inline-block;
             padding: 5px 12px;
@@ -444,91 +395,77 @@
             font-size: 0.85rem;
             font-weight: 600;
         }
-
         .badge.high {
-            background: rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.1);
             color: var(--danger);
         }
-
         .badge.medium {
-            background: rgba(245, 158, 11, 0.2);
+            background: rgba(245, 158, 11, 0.1);
             color: var(--warning);
         }
-
         .badge.low {
-            background: rgba(16, 185, 129, 0.2);
+            background: rgba(16, 185, 129, 0.1);
             color: var(--success);
         }
-
         .filter-bar {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
         .filter-bar select {
             padding: 10px 15px;
             border-radius: 8px;
-            border: 2px solid var(--bg-card-hover);
+            border: 2px solid #cbd5e1;
             background: var(--bg-card);
             color: var(--text-primary);
             font-size: 1rem;
             cursor: pointer;
         }
-
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8rem;
             }
-
             .step-indicator {
                 flex-wrap: wrap;
             }
-
             .step {
                 margin-bottom: 20px;
             }
-
             .button-group {
                 flex-direction: column;
             }
-
             .btn {
                 width: 100%;
             }
-
             .reports-table {
                 font-size: 0.85rem;
             }
-
             .reports-table th,
             .reports-table td {
                 padding: 10px 5px;
             }
         }
-
         .alert {
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239, 68, 68, 0.08);
             border-left: 4px solid var(--danger);
+            color: var(--text-primary);
         }
-
         .alert h3 {
             margin-bottom: 10px;
             color: var(--danger);
         }
-
         .info-box {
-            background: rgba(99, 102, 241, 0.1);
+            background: rgba(79, 70, 229, 0.08);
             border-left: 4px solid var(--primary);
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
+            color: var(--text-primary);
         }
-
         .info-box h3 {
             color: var(--primary);
             margin-bottom: 10px;
@@ -541,7 +478,6 @@
             <h1>🤝 Guia Conexão Familiar</h1>
             <p>Capacitando pais e responsáveis no combate ao bullying escolar</p>
         </header>
-
         <!-- Onboarding Section -->
         <div id="onboarding-section" class="content-section active">
             <div class="step-indicator">
@@ -562,17 +498,14 @@
                     <div class="step-label">Processamento</div>
                 </div>
             </div>
-
             <!-- Step 1 -->
             <div class="card step-content" data-step="1">
                 <h2>🕐 O Momento Certo</h2>
                 <p style="margin: 20px 0; font-size: 1.1rem;">Para criar um ambiente propício ao diálogo, escolha um momento especial com seu filho(a).</p>
-                
                 <div class="info-box">
                     <h3>Por que isso é importante?</h3>
                     <p>Conversas sobre temas sensíveis precisam acontecer em momentos de calma e conexão. Evite períodos de tensão, pressa ou quando há outras pessoas presentes.</p>
                 </div>
-
                 <h3 style="margin: 30px 0 15px 0;">✅ Exemplos de bons momentos:</h3>
                 <ul style="margin-left: 20px; color: var(--text-secondary);">
                     <li>Durante um passeio de carro</li>
@@ -581,22 +514,18 @@
                     <li>Durante uma caminhada no parque</li>
                     <li>Enquanto praticam um hobby juntos</li>
                 </ul>
-
                 <div class="checkbox-container" id="step1-checkbox">
                     <input type="checkbox" id="momento-check">
                     <label for="momento-check">Sim, escolhi um momento sem pressa e em particular para conversar com meu filho(a).</label>
                 </div>
-
                 <div class="button-group">
                     <button class="btn btn-primary" id="step1-next" disabled>Avançar</button>
                 </div>
             </div>
-
             <!-- Step 2 -->
             <div class="card step-content" data-step="2" style="display: none;">
                 <h2>🛡️ Criando o Porto Seguro</h2>
                 <p style="margin: 20px 0; font-size: 1.1rem;">A forma como você escuta é tão importante quanto o que você diz.</p>
-
                 <div class="info-box">
                     <h3>Princípios da Escuta Ativa</h3>
                     <p><strong>Valide os sentimentos:</strong> "Eu entendo que isso deve ser difícil para você."</p>
@@ -604,13 +533,11 @@
                     <p><strong>Mantenha contato visual:</strong> Demonstre presença total.</p>
                     <p><strong>Não interrompa:</strong> Deixe seu filho(a) terminar de falar.</p>
                 </div>
-
                 <div class="video-container">
                     <div class="video-placeholder">🎬</div>
                     <p style="color: var(--text-muted);">Exemplo de postura e escuta atenta</p>
                     <p style="margin-top: 10px;">Uma conversa acolhedora cria confiança e abertura emocional.</p>
                 </div>
-
                 <div class="alert">
                     <h3>⚠️ Evite estas reações:</h3>
                     <ul style="margin-left: 20px;">
@@ -620,30 +547,25 @@
                         <li>"Vou lá na escola resolver isso agora!"</li>
                     </ul>
                 </div>
-
                 <div class="button-group">
                     <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
                     <button class="btn btn-primary" onclick="nextStep()">Entendi, Avançar</button>
                 </div>
             </div>
-
             <!-- Step 3 -->
             <div class="card step-content" data-step="3" style="display: none;">
                 <h2>✨ A Pergunta Mágica</h2>
                 <p style="margin: 20px 0; font-size: 1.1rem;">Perguntas abertas e indiretas são mais eficazes do que questões diretas.</p>
-
                 <div class="info-box">
                     <h3>Por que perguntas abertas funcionam melhor?</h3>
                     <p>Elas permitem que seu filho(a) compartilhe no próprio ritmo, sem sentir-se pressionado ou interrogado.</p>
                 </div>
-
                 <h3 style="margin: 30px 0 15px 0;">❌ Evite perguntas diretas:</h3>
                 <ul style="margin-left: 20px; color: var(--danger);">
                     <li>"Você está sofrendo bullying?"</li>
                     <li>"Alguém está te maltratando?"</li>
                     <li>"Por que você não tem amigos?"</li>
                 </ul>
-
                 <h3 style="margin: 30px 0 15px 0;">✅ Prefira perguntas abertas:</h3>
                 <ul style="margin-left: 20px; color: var(--success);">
                     <li>"O que tem sido mais chato na escola ultimamente?"</li>
@@ -651,31 +573,26 @@
                     <li>"Tem algo que você gostaria de mudar na escola?"</li>
                     <li>"Com quem você mais gosta de conversar no recreio?"</li>
                 </ul>
-
                 <div class="practice-field">
                     <h3 style="margin-bottom: 15px;">🎯 Campo de Prática</h3>
                     <p style="margin-bottom: 10px; color: var(--text-secondary);">Digite a pergunta que você pretende fazer ao seu filho(a):</p>
                     <textarea id="practice-question" placeholder="Ex: Como tem sido seu dia na escola?"></textarea>
                     <div id="question-feedback" class="feedback"></div>
                 </div>
-
                 <div class="button-group">
                     <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
                     <button class="btn btn-primary" onclick="analyzeQuestion()">Analisar Pergunta</button>
                     <button class="btn btn-primary" id="step3-next" style="display: none;" onclick="nextStep()">Avançar</button>
                 </div>
             </div>
-
             <!-- Step 4 -->
             <div class="card step-content" data-step="4" style="display: none;">
                 <h2>💭 O Processamento</h2>
                 <p style="margin: 20px 0; font-size: 1.1rem;">Quando seu filho(a) se abrir, este é o momento mais delicado.</p>
-
                 <div class="alert">
                     <h3>⚠️ Este é o momento de ESCUTAR, não de AGIR</h3>
                     <p>Não prometa resolver tudo imediatamente. Não vá à escola confrontar alguém sem um plano estruturado.</p>
                 </div>
-
                 <div class="info-box">
                     <h3>O que fazer quando seu filho(a) falar:</h3>
                     <ol style="margin-left: 20px; line-height: 2;">
@@ -686,7 +603,6 @@
                         <li><strong>Envolva a escola de forma estruturada:</strong> Use o formulário de relato que forneceremos.</li>
                     </ol>
                 </div>
-
                 <h3 style="margin: 30px 0 15px 0;">✅ Frases que ajudam:</h3>
                 <ul style="margin-left: 20px; color: var(--success); line-height: 2;">
                     <li>"Você não está sozinho(a) nisso."</li>
@@ -694,46 +610,38 @@
                     <li>"Vamos encontrar uma solução juntos."</li>
                     <li>"A escola tem pessoas preparadas para nos ajudar."</li>
                 </ul>
-
                 <div class="button-group">
                     <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
                     <button class="btn btn-primary" onclick="completeOnboarding()">Concluir Guia e Preencher Relato</button>
                 </div>
             </div>
         </div>
-
         <!-- Report Form Section -->
         <div id="report-section" class="content-section">
             <div class="card">
                 <h2>📋 Formulário de Relato</h2>
                 <p style="margin: 20px 0;">Preencha as informações abaixo com base na conversa que você teve com seu filho(a).</p>
-
                 <form id="report-form">
                     <div class="form-group">
                         <label for="parent-name">Nome do Responsável *</label>
                         <input type="text" id="parent-name" required>
                     </div>
-
                     <div class="form-group">
                         <label for="parent-phone">Telefone *</label>
                         <input type="tel" id="parent-phone" required>
                     </div>
-
                     <div class="form-group">
                         <label for="parent-email">E-mail *</label>
                         <input type="email" id="parent-email" required>
                     </div>
-
                     <div class="form-group">
                         <label for="student-name">Nome do Aluno(a) *</label>
                         <input type="text" id="student-name" required>
                     </div>
-
                     <div class="form-group">
                         <label for="student-grade">Turma/Série *</label>
                         <input type="text" id="student-grade" placeholder="Ex: 7º Ano B" required>
                     </div>
-
                     <div class="form-group">
                         <label for="contact-reason">Motivo Principal do Contato *</label>
                         <select id="contact-reason" required>
@@ -744,7 +652,6 @@
                             <option value="other">Outro</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="incident-location">Onde ocorreu? *</label>
                         <select id="incident-location" required>
@@ -758,17 +665,14 @@
                             <option value="other">Outro local</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="incident-when">Quando ocorreu? *</label>
                         <input type="text" id="incident-when" placeholder="Ex: Esta semana, mês passado..." required>
                     </div>
-
                     <div class="form-group">
                         <label for="incident-details">Detalhes do Relato *</label>
                         <textarea id="incident-details" rows="5" placeholder="Descreva o que seu filho(a) relatou..." required></textarea>
                     </div>
-
                     <div class="form-group">
                         <label for="emotion-scale">Como seu filho(a) se sente? (1 = Tranquilo, 10 = Muito Angustiado) *</label>
                         <div class="slider-container">
@@ -776,7 +680,6 @@
                             <div class="slider-value" id="emotion-value">5</div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label for="psychological-support">Disponibilidade para Apoio Psicológico *</label>
                         <select id="psychological-support" required>
@@ -786,20 +689,17 @@
                             <option value="maybe">Talvez, gostaria de mais informações</option>
                         </select>
                     </div>
-
                     <div class="button-group">
                         <button type="submit" class="btn btn-primary">Enviar Relato</button>
                     </div>
                 </form>
             </div>
         </div>
-
         <!-- Admin Panel Section -->
         <div id="admin-section" class="content-section">
             <div class="card">
                 <h2>📊 Painel Administrativo - Radar Escolar</h2>
                 <p style="margin: 20px 0;">Visualização e gerenciamento de relatos recebidos.</p>
-
                 <div class="stats-grid">
                     <div class="stat-card danger">
                         <div class="stat-value" id="high-risk-count">0</div>
@@ -818,7 +718,6 @@
                         <div class="stat-label">Pais que Completaram o Guia</div>
                     </div>
                 </div>
-
                 <div class="filter-bar">
                     <select id="filter-grade">
                         <option value="all">Todas as Turmas</option>
@@ -836,7 +735,6 @@
                         <option value="closed">Fechado</option>
                     </select>
                 </div>
-
                 <div style="overflow-x: auto;">
                     <table class="reports-table">
                         <thead>
@@ -862,24 +760,20 @@
             </div>
         </div>
     </div>
-
     <script>
         // Data storage
         let reports = [];
         let completedOnboardings = 0;
         let currentStep = 1;
-
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             checkUrlParams();
             setupEventListeners();
             loadSampleData();
         });
-
         function checkUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
             const view = urlParams.get('view');
-            
             if (view === 'relato') {
                 showSection('report');
             } else if (view === 'admin') {
@@ -888,93 +782,72 @@
                 showSection('onboarding');
             }
         }
-
         function setupEventListeners() {
             // Step 1 checkbox
             document.getElementById('momento-check').addEventListener('change', function() {
                 document.getElementById('step1-next').disabled = !this.checked;
             });
-
             document.getElementById('step1-next').addEventListener('click', nextStep);
-
             // Emotion scale slider
             const emotionSlider = document.getElementById('emotion-scale');
             const emotionValue = document.getElementById('emotion-value');
-            
             emotionSlider.addEventListener('input', function() {
                 emotionValue.textContent = this.value;
                 emotionValue.style.color = getEmotionColor(parseInt(this.value));
             });
-
             // Report form
             document.getElementById('report-form').addEventListener('submit', handleReportSubmit);
-
             // Filter listeners
             document.getElementById('filter-grade').addEventListener('change', filterReports);
             document.getElementById('filter-risk').addEventListener('change', filterReports);
             document.getElementById('filter-status').addEventListener('change', filterReports);
         }
-
         function getEmotionColor(value) {
             if (value >= 8) return '#ef4444';
             if (value >= 5) return '#f59e0b';
             return '#10b981';
         }
-
         function nextStep() {
             if (currentStep < 4) {
                 // Hide current step
                 document.querySelector(`.step-content[data-step="${currentStep}"]`).style.display = 'none';
-                
                 // Update step indicator
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
-                
                 currentStep++;
-                
                 // Show next step
                 document.querySelector(`.step-content[data-step="${currentStep}"]`).style.display = 'block';
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
-                
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
         function previousStep() {
             if (currentStep > 1) {
                 // Hide current step
                 document.querySelector(`.step-content[data-step="${currentStep}"]`).style.display = 'none';
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
-                
                 currentStep--;
-                
                 // Show previous step
                 document.querySelector(`.step-content[data-step="${currentStep}"]`).style.display = 'block';
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('completed');
                 document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
-                
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
         function analyzeQuestion() {
             const question = document.getElementById('practice-question').value.trim();
             const feedback = document.getElementById('question-feedback');
-            
             if (!question) {
                 feedback.className = 'feedback warning';
                 feedback.innerHTML = '<strong>⚠️ Atenção:</strong> Por favor, digite uma pergunta para analisar.';
                 return;
             }
-
             // Check for closed questions (yes/no answers)
             const closedQuestions = ['você está', 'você é', 'você sofre', 'alguém te', 'tem alguém'];
             const isClosed = closedQuestions.some(phrase => question.toLowerCase().includes(phrase));
-            
             // Check for open questions
             const openWords = ['como', 'o que', 'qual', 'quais', 'conte', 'descreva', 'me fale'];
             const isOpen = openWords.some(word => question.toLowerCase().includes(word));
-
             if (isClosed || question.endsWith('?') && (question.toLowerCase().includes('você') || question.toLowerCase().includes('voce'))) {
                 if (!isOpen) {
                     feedback.className = 'feedback warning';
@@ -983,23 +856,19 @@
                     return;
                 }
             }
-
             feedback.className = 'feedback success';
             feedback.innerHTML = '<strong>✅ Ótima pergunta!</strong> Esta é uma pergunta aberta que permite que seu filho(a) compartilhe mais livremente.';
             document.getElementById('step3-next').style.display = 'inline-block';
         }
-
         function completeOnboarding() {
             completedOnboardings++;
             showSection('report');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         function showSection(section) {
             document.querySelectorAll('.content-section').forEach(s => {
                 s.classList.remove('active');
             });
-
             if (section === 'onboarding') {
                 document.getElementById('onboarding-section').classList.add('active');
             } else if (section === 'report') {
@@ -1010,13 +879,10 @@
                 renderReports();
             }
         }
-
         function handleReportSubmit(e) {
             e.preventDefault();
-
             const emotionScale = parseInt(document.getElementById('emotion-scale').value);
             const contactReason = document.getElementById('contact-reason').value;
-
             const report = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString('pt-BR'),
@@ -1034,35 +900,27 @@
                 riskLevel: calculateRiskLevel(emotionScale, contactReason),
                 status: 'pending'
             };
-
             reports.push(report);
-            
-            alert('✅ Relato enviado com sucesso!\n\nA equipe escolar entrará em contato em breve.\n\nObrigado por confiar em nós.');
-            
+            alert('✅ Relato enviado com sucesso!\nA equipe escolar entrará em contato em breve.\nObrigado por confiar em nós.');
             document.getElementById('report-form').reset();
             document.getElementById('emotion-value').textContent = '5';
-            
             // Redirect to admin to see the report
             window.location.href = '?view=admin';
         }
-
         function calculateRiskLevel(emotionScale, contactReason) {
             if (emotionScale >= 8 && contactReason === 'victim') return 'high';
             if (emotionScale >= 8 || contactReason === 'victim') return 'medium';
             if (emotionScale >= 5) return 'medium';
             return 'low';
         }
-
         function updateAdminStats() {
             const highRisk = reports.filter(r => r.riskLevel === 'high').length;
             const mediumRisk = reports.filter(r => r.riskLevel === 'medium').length;
             const lowRisk = reports.filter(r => r.riskLevel === 'low').length;
-
             document.getElementById('high-risk-count').textContent = highRisk;
             document.getElementById('medium-risk-count').textContent = mediumRisk;
             document.getElementById('low-risk-count').textContent = lowRisk;
             document.getElementById('completed-onboarding').textContent = completedOnboardings;
-
             // Populate grade filter
             const grades = [...new Set(reports.map(r => r.studentGrade))];
             const gradeFilter = document.getElementById('filter-grade');
@@ -1074,11 +932,9 @@
                 gradeFilter.appendChild(option);
             });
         }
-
         function renderReports(filteredReports = null) {
             const reportsToRender = filteredReports || reports;
             const tbody = document.getElementById('reports-tbody');
-            
             if (reportsToRender.length === 0) {
                 tbody.innerHTML = `
                     <tr>
@@ -1089,7 +945,6 @@
                 `;
                 return;
             }
-
             tbody.innerHTML = reportsToRender.map(report => `
                 <tr>
                     <td>${report.date}</td>
@@ -1098,7 +953,7 @@
                     <td>${getReasonLabel(report.contactReason)}</td>
                     <td><span class="badge ${report.riskLevel}">${getRiskLabel(report.riskLevel)}</span></td>
                     <td>
-                        <select onchange="updateReportStatus(${report.id}, this.value)" style="padding: 5px; border-radius: 5px; background: var(--bg-main); color: var(--text-primary); border: 1px solid var(--bg-card-hover);">
+                        <select onchange="updateReportStatus(${report.id}, this.value)" style="padding: 5px; border-radius: 5px; background: var(--bg-main); color: var(--text-primary); border: 1px solid #cbd5e1;">
                             <option value="pending" ${report.status === 'pending' ? 'selected' : ''}>Pendente</option>
                             <option value="in-progress" ${report.status === 'in-progress' ? 'selected' : ''}>Em Acompanhamento</option>
                             <option value="closed" ${report.status === 'closed' ? 'selected' : ''}>Fechado</option>
@@ -1110,7 +965,6 @@
                 </tr>
             `).join('');
         }
-
         function getReasonLabel(reason) {
             const labels = {
                 'victim': 'Vítima',
@@ -1120,7 +974,6 @@
             };
             return labels[reason] || reason;
         }
-
         function getRiskLabel(level) {
             const labels = {
                 'high': 'Alto',
@@ -1129,29 +982,22 @@
             };
             return labels[level] || level;
         }
-
         function filterReports() {
             const gradeFilter = document.getElementById('filter-grade').value;
             const riskFilter = document.getElementById('filter-risk').value;
             const statusFilter = document.getElementById('filter-status').value;
-
             let filtered = reports;
-
             if (gradeFilter !== 'all') {
                 filtered = filtered.filter(r => r.studentGrade === gradeFilter);
             }
-
             if (riskFilter !== 'all') {
                 filtered = filtered.filter(r => r.riskLevel === riskFilter);
             }
-
             if (statusFilter !== 'all') {
                 filtered = filtered.filter(r => r.status === statusFilter);
             }
-
             renderReports(filtered);
         }
-
         function updateReportStatus(reportId, newStatus) {
             const report = reports.find(r => r.id === reportId);
             if (report) {
@@ -1159,41 +1005,31 @@
                 updateAdminStats();
             }
         }
-
         function viewReportDetails(reportId) {
             const report = reports.find(r => r.id === reportId);
             if (!report) return;
-
             const details = `
 📋 DETALHES DO RELATO
-
 📅 Data: ${report.date}
 👤 Responsável: ${report.parentName}
 📞 Telefone: ${report.parentPhone}
 📧 E-mail: ${report.parentEmail}
-
 👨‍🎓 Aluno(a): ${report.studentName}
 🏫 Turma: ${report.studentGrade}
-
 🎯 Motivo: ${getReasonLabel(report.contactReason)}
 📍 Local: ${report.incidentLocation}
 🕐 Quando: ${report.incidentWhen}
-
 💭 Relato:
 ${report.incidentDetails}
-
 😟 Nível Emocional: ${report.emotionScale}/10
 🆘 Risco: ${getRiskLabel(report.riskLevel).toUpperCase()}
 🧠 Apoio Psicológico: ${report.psychologicalSupport === 'yes' ? 'Sim' : report.psychologicalSupport === 'no' ? 'Não' : 'Talvez'}
             `;
-
             alert(details);
         }
-
         function loadSampleData() {
             // Sample data for demonstration
             completedOnboardings = 12;
-            
             reports = [
                 {
                     id: 1,
