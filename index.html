@@ -1,0 +1,1091 @@
+<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Conexão Familiar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: var(--gray-800);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-dot {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.125rem;
+            background: var(--gray-200);
+            color: var(--gray-600);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .step-line {
+            width: 4rem;
+            height: 2px;
+            background: var(--gray-200);
+        }
+
+        .step-line.active {
+            background: var(--primary);
+        }
+
+        .step-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .step-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .step-text {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .checklist {
+            background: var(--gray-100);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-icon {
+            color: var(--secondary);
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .practice-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .practice-feedback {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .feedback-good {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .feedback-bad {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-item {
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .grid-item.danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .grid-item.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .grid-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid-title i {
+            font-size: 1.25rem;
+        }
+
+        .grid-list {
+            list-style: none;
+        }
+
+        .grid-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid rgba(245, 158, 11, 0.2);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--warning);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .range-slider {
+            flex: 1;
+        }
+
+        .range-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checkbox-group input {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.danger { color: var(--danger); }
+        .stat-icon.warning { color: var(--warning); }
+        .stat-icon.success { color: var(--success); }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--gray-100);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--gray-100);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .status-in-progress {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-completed {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .risk-high {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .risk-medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .risk-low {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .heatmap-item {
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .heatmap-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .heatmap-fill {
+            height: 100%;
+            background: var(--danger);
+            border-radius: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="onboarding-view">
+        <div class="container">
+            <div class="header">
+                <h1>Guia Conexão Familiar</h1>
+                <p>Onboarding Psicoeducacional para Pais e Responsáveis</p>
+            </div>
+
+            <div class="card">
+                <div class="steps-container">
+                    <div class="step-indicator">
+                        <div class="step-dot active" id="step-dot-1">1</div>
+                        <div class="step-line" id="step-line-1"></div>
+                        <div class="step-dot" id="step-dot-2">2</div>
+                        <div class="step-line" id="step-line-2"></div>
+                        <div class="step-dot" id="step-dot-3">3</div>
+                        <div class="step-line" id="step-line-3"></div>
+                        <div class="step-dot" id="step-dot-4">4</div>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-content">
+                    <!-- Step 1 Content -->
+                    <div id="step-1">
+                        <i class="fas fa-shield-alt step-icon"></i>
+                        <h2 class="step-title">O Momento Certo</h2>
+                        <p class="step-text">
+                            Escolha um momento de baixa tensão para conversar com seu filho. 
+                            Evite momentos de estresse ou pressa. Considere:
+                        </p>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Durante um passeio de carro
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Enquanto cozinham juntos
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Antes de dormir
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Em um ambiente privado e tranquilo
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="nextStep()">Confirmar Momento Escolhido</button>
+                    </div>
+
+                    <!-- Step 2 Content -->
+                    <div id="step-2" class="hidden">
+                        <i class="fas fa-comments step-icon"></i>
+                        <h2 class="step-title">Criando o Porto Seguro</h2>
+                        <p class="step-text">
+                            Sua postura é fundamental para criar um ambiente seguro. Pratique a escuta ativa:
+                        </p>
+                        <div class="checklist">
+                            <p><strong>Princípios da Comunicação Não-Violenta:</strong></p>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Valide os sentimentos do seu filho: "Isso deve ter sido muito difícil para você"
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Evite negar ou minimizar: NÃO diga "Não é nada demais!"
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Mantenha contato visual e postura aberta
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Evite interromper ou julgar imediatamente
+                            </div>
+                        </div>
+                        <div class="checklist" style="background: var(--gray-100); margin-top: 1rem;">
+                            <p style="font-style: italic; color: var(--gray-600);">
+                                "Quando você fala, eu escuto. Quando você chora, eu estou aqui. 
+                                Seus sentimentos são importantes para mim."
+                            </p>
+                        </div>
+                        <button class="btn btn-primary" onclick="nextStep()">Entendi - Próximo Passo</button>
+                    </div>
+
+                    <!-- Step 3 Content -->
+                    <div id="step-3" class="hidden">
+                        <i class="fas fa-users step-icon"></i>
+                        <h2 class="step-title">A Pergunta Mágica</h2>
+                        <p class="step-text">
+                            Faça perguntas abertas e indiretas para quebrar a defesa e encorajar o diálogo:
+                        </p>
+                        <div class="grid-2">
+                            <div class="grid-item danger">
+                                <div class="grid-title">
+                                    <i class="fas fa-times-circle"></i>
+                                    Evite perguntas diretas:
+                                </div>
+                                <ul class="grid-list">
+                                    <li><i class="fas fa-times"></i> "Você está sofrendo bullying?"</li>
+                                    <li><i class="fas fa-times"></i> "Quem está te machucando?"</li>
+                                    <li><i class="fas fa-times"></i> "Por que você não se defende?"</li>
+                                </ul>
+                            </div>
+                            <div class="grid-item success">
+                                <div class="grid-title">
+                                    <i class="fas fa-check-circle"></i>
+                                    Prefira perguntas abertas:
+                                </div>
+                                <ul class="grid-list">
+                                    <li><i class="fas fa-check"></i> "O que tem sido mais chato na escola?"</li>
+                                    <li><i class="fas fa-check"></i> "Como você se sente nos intervalos?"</li>
+                                    <li><i class="fas fa-check"></i> "Tem algo que você gostaria que fosse diferente?"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="checklist">
+                            <label class="form-label">Pratique aqui sua pergunta:</label>
+                            <input type="text" class="practice-input" id="practice-question" placeholder="Digite sua pergunta aberta...">
+                            <div class="practice-feedback feedback-good" id="practice-feedback">
+                                Ótima pergunta aberta! 👍
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="nextStep()">Pronto para Conversar</button>
+                    </div>
+
+                    <!-- Step 4 Content -->
+                    <div id="step-4" class="hidden">
+                        <i class="fas fa-eye step-icon"></i>
+                        <h2 class="step-title">O Processamento</h2>
+                        <p class="step-text">
+                            Quando seu filho se abrir, lembre-se:
+                        </p>
+                        <div class="warning-box">
+                            <div class="warning-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                NÃO prometa resolver tudo imediatamente
+                            </div>
+                            <p>Evite reações impulsivas como "Vou na escola agora mesmo!"</p>
+                        </div>
+                        <div class="checklist">
+                            <div class="warning-title">
+                                <i class="fas fa-check-circle"></i>
+                                FAÇA o seguinte:
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Agradeça pela confiança: "Obrigado por me contar isso"
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Valide os sentimentos: "Isso deve ter sido muito difícil"
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Proponha ajuda conjunta: "Vamos pensar juntos no que fazer?"
+                            </div>
+                            <div class="checklist-item">
+                                <i class="fas fa-check-circle checklist-icon"></i>
+                                Busque apoio profissional quando necessário
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="goToReport()">Acessar Formulário de Relato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="report-view" class="hidden">
+        <div class="container">
+            <div class="header">
+                <h1>Formulário de Relato</h1>
+                <p>Informe os detalhes da situação para que possamos ajudar</p>
+            </div>
+
+            <div class="card">
+                <form id="report-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nome do Responsável *</label>
+                            <input type="text" class="form-input" id="parent-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Telefone *</label>
+                            <input type="tel" class="form-input" id="parent-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">E-mail *</label>
+                            <input type="email" class="form-input" id="parent-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Turma/Série do Aluno(a) *</label>
+                            <input type="text" class="form-input" id="student-class" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nome do Aluno(a) *</label>
+                        <input type="text" class="form-input" id="student-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Motivo Principal do Contato *</label>
+                        <select class="form-select" id="contact-reason" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="Suspeita de Vítima">Suspeita de Vítima</option>
+                            <option value="Suspeita de Agressor">Suspeita de Agressor</option>
+                            <option value="Presenciou Algo">Presenciou Algo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Detalhes do Relato (Onde/Quando/O Quê) *</label>
+                        <textarea class="form-textarea" id="report-details" placeholder="Descreva com detalhes o que aconteceu, quando e onde ocorreu..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Como seu filho(a) se sente? (Escala de 1 a 10) *</label>
+                        <div class="range-container">
+                            <input type="range" class="range-slider" id="emotion-scale" min="1" max="10" value="5">
+                            <span class="range-value" id="scale-value">5</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                            <span>1 - Muito bem</span>
+                            <span>10 - Muito mal</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="psychological-support">
+                            Estou disponível para apoio psicológico individualizado
+                        </label>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-secondary">Enviar Relato</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-view" class="hidden">
+        <div class="container">
+            <div class="header">
+                <h1>Painel Administrativo</h1>
+                <p>Radar Escolar - Monitoramento de Casos</p>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <i class="fas fa-exclamation-triangle stat-icon danger"></i>
+                    <div class="stat-number" id="high-priority-count">2</div>
+                    <div class="stat-label">Alta Prioridade</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
+                        Casos críticos exigindo atenção imediata
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-chart-line stat-icon warning"></i>
+                    <div class="stat-number" id="classes-count">3</div>
+                    <div class="stat-label">Turmas com Mais Casos</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
+                        Turmas identificadas para intervenção grupal
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-comments stat-icon success"></i>
+                    <div class="stat-number" id="onboarding-count">3</div>
+                    <div class="stat-label">Onboarding Concluído</div>
+                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
+                        Pais que completaram o guia psicoeducacional
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Relatos Recentes</h2>
+                <div class="table-container">
+                    <table id="reports-table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Turma</th>
+                                <th>Motivo</th>
+                                <th>Risco</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reports-body">
+                            <!-- Reports will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Mapa de Calor por Turma</h2>
+                <div class="heatmap-grid" id="heatmap-container">
+                    <!-- Heatmap will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracking
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Sample reports data
+        const reportsData = [
+            {
+                id: 1,
+                parentName: 'Maria Silva',
+                studentName: 'João Silva',
+                studentClass: '8º Ano A',
+                contactReason: 'Suspeita de Vítima',
+                emotionScale: 8,
+                details: 'Relata que o filho está evitando ir à escola e parece triste. Suspeita de bullying no recreio.',
+                status: 'Pendente',
+                timestamp: '2024-01-15 14:30'
+            },
+            {
+                id: 2,
+                parentName: 'Carlos Oliveira',
+                studentName: 'Ana Oliveira',
+                studentClass: '6º Ano B',
+                contactReason: 'Presenciou Algo',
+                emotionScale: 6,
+                details: 'Filha viu um colega sendo empurrado no corredor durante o intervalo.',
+                status: 'Em Acompanhamento',
+                timestamp: '2024-01-14 10:15'
+            },
+            {
+                id: 3,
+                parentName: 'Roberta Santos',
+                studentName: 'Pedro Santos',
+                studentClass: '9º Ano C',
+                contactReason: 'Suspeita de Agressor',
+                emotionScale: 4,
+                details: 'Professor relatou comportamento agressivo com colegas. Filho nega, mas está diferente em casa.',
+                status: 'Pendente',
+                timestamp: '2024-01-13 16:45'
+            }
+        ];
+
+        // URL parameter handling
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // View switching
+        function showView(view) {
+            document.getElementById('onboarding-view').classList.add('hidden');
+            document.getElementById('report-view').classList.add('hidden');
+            document.getElementById('admin-view').classList.add('hidden');
+            
+            if (view === 'onboarding') {
+                document.getElementById('onboarding-view').classList.remove('hidden');
+            } else if (view === 'report') {
+                document.getElementById('report-view').classList.remove('hidden');
+            } else if (view === 'admin') {
+                document.getElementById('admin-view').classList.remove('hidden');
+                renderAdminView();
+            }
+        }
+
+        // Initialize based on URL parameters
+        window.addEventListener('DOMContentLoaded', () => {
+            const viewParam = getURLParameter('view');
+            if (viewParam === 'relato') {
+                showView('report');
+            } else if (viewParam === 'admin') {
+                showView('admin');
+            } else {
+                showView('onboarding');
+            }
+        });
+
+        // Onboarding navigation
+        function updateStepIndicators() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const dot = document.getElementById(`step-dot-${i}`);
+                const line = document.getElementById(`step-line-${i}`);
+                
+                if (i < currentStep) {
+                    dot.classList.remove('active');
+                    dot.classList.add('completed');
+                    if (line) line.classList.add('active');
+                } else if (i === currentStep) {
+                    dot.classList.add('active');
+                    dot.classList.remove('completed');
+                    if (line) line.classList.remove('active');
+                } else {
+                    dot.classList.remove('active', 'completed');
+                    if (line) line.classList.remove('active');
+                }
+            }
+        }
+
+        function showStep(step) {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+            }
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+                updateStepIndicators();
+            }
+        }
+
+        function goToReport() {
+            // In a real implementation, this would redirect to the report page
+            // For this demo, we'll just show the report view
+            showView('report');
+        }
+
+        // Report form handling
+        document.getElementById('report-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Relato enviado com sucesso! A equipe da escola entrará em contato em breve.');
+            // In a real implementation, this would send data to a server
+            // For now, we'll redirect back to onboarding
+            window.location.href = '/';
+        });
+
+        // Emotion scale slider
+        const emotionScale = document.getElementById('emotion-scale');
+        const scaleValue = document.getElementById('scale-value');
+        if (emotionScale && scaleValue) {
+            emotionScale.addEventListener('input', function() {
+                scaleValue.textContent = this.value;
+            });
+        }
+
+        // Admin view rendering
+        function renderAdminView() {
+            // Render reports table
+            const reportsBody = document.getElementById('reports-body');
+            if (reportsBody) {
+                reportsBody.innerHTML = '';
+                reportsData.forEach(report => {
+                    const row = document.createElement('tr');
+                    
+                    // Determine risk level
+                    let riskClass = 'risk-low';
+                    let riskText = 'Baixo';
+                    if (report.contactReason === 'Suspeita de Vítima' && report.emotionScale >= 7) {
+                        riskClass = 'risk-high';
+                        riskText = 'Alto';
+                    } else if (report.emotionScale >= 5) {
+                        riskClass = 'risk-medium';
+                        riskText = 'Médio';
+                    }
+                    
+                    // Determine status class
+                    let statusClass = 'status-pending';
+                    if (report.status === 'Em Acompanhamento') {
+                        statusClass = 'status-in-progress';
+                    } else if (report.status === 'Concluído') {
+                        statusClass = 'status-completed';
+                    }
+                    
+                    row.innerHTML = `
+                        <td>
+                            <div style="font-weight: 600;">${report.studentName}</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">${report.parentName}</div>
+                        </td>
+                        <td>${report.studentClass}</td>
+                        <td>
+                            <span style="background: var(--gray-100); padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">
+                                ${report.contactReason}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="${riskClass}" style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                ${riskText} (Nível ${report.emotionScale})
+                            </span>
+                        </td>
+                        <td>
+                            <span class="${statusClass} status-badge">${report.status}</span>
+                        </td>
+                        <td>
+                            ${report.status === 'Pendente' ? 
+                                '<button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="updateStatus(' + report.id + ', \'Em Acompanhamento\')">Iniciar Acompanhamento</button>' :
+                                report.status === 'Em Acompanhamento' ? 
+                                '<button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="updateStatus(' + report.id + ', \'Concluído\')">Marcar como Concluído</button>' :
+                                '<span style="color: var(--success); font-weight: 600;">Concluído</span>'
+                            }
+                        </td>
+                    `;
+                    reportsBody.appendChild(row);
+                });
+            }
+            
+            // Update stats
+            const highPriorityCount = reportsData.filter(r => r.contactReason === 'Suspeita de Vítima' && r.emotionScale >= 7).length;
+            const classes = [...new Set(reportsData.map(r => r.studentClass))];
+            document.getElementById('high-priority-count').textContent = highPriorityCount;
+            document.getElementById('classes-count').textContent = classes.length;
+            document.getElementById('onboarding-count').textContent = reportsData.length;
+            
+            // Render heatmap
+            const heatmapContainer = document.getElementById('heatmap-container');
+            if (heatmapContainer) {
+                heatmapContainer.innerHTML = '';
+                const classStats = {};
+                reportsData.forEach(report => {
+                    classStats[report.studentClass] = (classStats[report.studentClass] || 0) + 1;
+                });
+                
+                const maxCount = Math.max(...Object.values(classStats));
+                Object.entries(classStats).forEach(([classRoom, count]) => {
+                    const item = document.createElement('div');
+                    item.className = 'heatmap-item';
+                    const percentage = (count / maxCount) * 100;
+                    item.innerHTML = `
+                        <div class="heatmap-header">
+                            <span style="font-weight: 600;">${classRoom}</span>
+                            <span style="background: var(--danger); color: white; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">
+                                ${count} casos
+                            </span>
+                        </div>
+                        <div class="heatmap-bar">
+                            <div class="heatmap-fill" style="width: ${percentage}%;"></div>
+                        </div>
+                    `;
+                    heatmapContainer.appendChild(item);
+                });
+            }
+        }
+
+        // Update report status (demo function)
+        function updateStatus(reportId, newStatus) {
+            // In a real implementation, this would update the server
+            // For demo purposes, we'll just update the UI
+            const row = event.target.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(5)');
+            const actionCell = row.querySelector('td:nth-child(6)');
+            
+            if (newStatus === 'Em Acompanhamento') {
+                statusCell.innerHTML = '<span class="status-in-progress status-badge">Em Acompanhamento</span>';
+                actionCell.innerHTML = '<button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="updateStatus(' + reportId + ', \'Concluído\')">Marcar como Concluído</button>';
+            } else if (newStatus === 'Concluído') {
+                statusCell.innerHTML = '<span class="status-completed status-badge">Concluído</span>';
+                actionCell.innerHTML = '<span style="color: var(--success); font-weight: 600;">Concluído</span>';
+            }
+            
+            // Update stats
+            renderAdminView();
+        }
+
+        // Initialize step indicators
+        updateStepIndicators();
+        showStep(currentStep);
+    </script>
+</body>
+</html>
