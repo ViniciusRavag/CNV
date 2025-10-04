@@ -570,6 +570,51 @@
             color: var(--primary);
             margin-right: 10px;
         }
+
+        /* Location Analysis */
+        .location-analysis {
+            margin-top: 30px;
+        }
+        .location-analysis h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .location-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .location-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .location-label {
+            width: 120px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .bar-container {
+            flex: 1;
+            height: 24px;
+            background: var(--bg-card-hover);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+        .bar-value {
+            min-width: 30px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -828,6 +873,16 @@
                     </ul>
                 </div>
 
+                <!-- Location Analysis -->
+                <div class="location-analysis">
+                    <h3>📍 Análise por Local de Ocorrência</h3>
+                    <div class="location-chart" id="location-chart">
+                        <div class="location-bar">
+                            <span class="location-label">Carregando...</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="filter-bar">
                     <select id="filter-grade">
                         <option value="all">Todas as Turmas</option>
@@ -885,6 +940,16 @@
         let reports = [];
         let completedOnboardings = 0;
         let currentStep = 1;
+        // Location labels mapping
+        const locationLabels = {
+            'classroom': 'Sala de aula',
+            'playground': 'Pátio/Recreio',
+            'bathroom': 'Banheiro',
+            'corridor': 'Corredor',
+            'entrance': 'Entrada/Saída',
+            'online': 'Online/Redes sociais',
+            'other': 'Outro local'
+        };
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             checkUrlParams();
@@ -988,6 +1053,7 @@
                 updateAdminStats();
                 renderReports();
                 updateGradeRanking();
+                updateLocationAnalysis();
             }
         }
         function handleReportSubmit(e) {
@@ -1076,6 +1142,33 @@
                 </li>
             `).join('');
         }
+        function updateLocationAnalysis() {
+            const locationCounts = {};
+            reports.forEach(report => {
+                locationCounts[report.incidentLocation] = (locationCounts[report.incidentLocation] || 0) + 1;
+            });
+            const totalReports = reports.length;
+            if (totalReports === 0) {
+                document.getElementById('location-chart').innerHTML = '<div class="location-bar"><span class="location-label">Nenhum relato registrado ainda.</span></div>';
+                return;
+            }
+            // Sort locations by count (descending)
+            const sortedLocations = Object.entries(locationCounts).sort((a, b) => b[1] - a[1]);
+            const chartHtml = sortedLocations.map(([location, count]) => {
+                const percentage = Math.round((count / totalReports) * 100);
+                const label = locationLabels[location] || location;
+                return `
+                    <div class="location-bar">
+                        <span class="location-label">${label}</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: ${percentage}%"></div>
+                        </div>
+                        <span class="bar-value">${count} (${percentage}%)</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('location-chart').innerHTML = chartHtml;
+        }
         function renderReports(filteredReports = null) {
             const reportsToRender = filteredReports || reports;
             const tbody = document.getElementById('reports-tbody');
@@ -1141,12 +1234,14 @@
                 filtered = filtered.filter(r => r.status === statusFilter);
             }
             renderReports(filtered);
+            updateLocationAnalysis(); // Update location analysis with filtered data
         }
         function updateReportStatus(reportId, newStatus) {
             const report = reports.find(r => r.id === reportId);
             if (report) {
                 report.status = newStatus;
                 updateAdminStats();
+                updateLocationAnalysis();
             }
         }
         function viewReportDetails(reportId) {
@@ -1159,7 +1254,7 @@
                 <p><strong>👨‍🎓 Aluno(a):</strong> ${report.studentName}</p>
                 <p><strong>🏫 Turma:</strong> ${report.studentGrade}</p>
                 <p><strong>🎯 Motivo:</strong> ${getReasonLabel(report.contactReason)}</p>
-                <p><strong>📍 Local:</strong> ${report.incidentLocation}</p>
+                <p><strong>📍 Local:</strong> ${locationLabels[report.incidentLocation] || report.incidentLocation}</p>
                 <p><strong>🕐 Quando:</strong> ${report.incidentWhen}</p>
                 <p><strong>💭 Relato:</strong></p>
                 <p style="margin-left: 20px; margin-top: 8px;">${report.incidentDetails}</p>
@@ -1239,6 +1334,38 @@
                     emotionScale: 6,
                     psychologicalSupport: 'yes',
                     riskLevel: 'medium',
+                    status: 'pending'
+                },
+                {
+                    id: 5,
+                    date: '05/10/2025',
+                    parentName: 'Fernanda Costa',
+                    parentPhone: '(11) 97654-3210',
+                    studentName: 'Mariana Costa',
+                    studentGrade: '7º Ano B',
+                    contactReason: 'victim',
+                    incidentLocation: 'bathroom',
+                    incidentWhen: '05/10/2025 11:45',
+                    incidentDetails: 'Minha filha está com medo de ir ao banheiro porque colegas a intimidam lá.',
+                    emotionScale: 7,
+                    psychologicalSupport: 'yes',
+                    riskLevel: 'medium',
+                    status: 'pending'
+                },
+                {
+                    id: 6,
+                    date: '06/10/2025',
+                    parentName: 'André Lima',
+                    parentPhone: '(11) 96543-2109',
+                    studentName: 'Gabriel Lima',
+                    studentGrade: '9º Ano A',
+                    contactReason: 'witness',
+                    incidentLocation: 'entrance',
+                    incidentWhen: '06/10/2025 07:30',
+                    incidentDetails: 'Meu filho viu um grupo de alunos empurrando outro na entrada da escola.',
+                    emotionScale: 4,
+                    psychologicalSupport: 'no',
+                    riskLevel: 'low',
                     status: 'pending'
                 }
             ];
