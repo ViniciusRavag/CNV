@@ -474,7 +474,7 @@
         .header-image {
             width: 100%;
             max-width: 600px;
-            height: 300px
+            height: 300px;
             margin: 0 auto;
             background-color: transparent;
             border-radius: 12px;
@@ -489,6 +489,86 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 30px;
+            position: relative;
+        }
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        .modal p {
+            margin: 8px 0;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        /* Grade Ranking */
+        .grade-ranking {
+            margin-top: 30px;
+        }
+        .grade-ranking h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .ranking-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+        .ranking-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -507,7 +587,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Onboarding Section -->
         <div id="onboarding-section" class="content-section">
             <header>
@@ -655,10 +734,6 @@
                         <input type="tel" id="parent-phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="parent-email">E-mail *</label>
-                        <input type="email" id="parent-email" required>
-                    </div>
-                    <div class="form-group">
                         <label for="student-name">Nome do Aluno(a) *</label>
                         <input type="text" id="student-name" required>
                     </div>
@@ -691,7 +766,7 @@
                     </div>
                     <div class="form-group">
                         <label for="incident-when">Quando ocorreu? *</label>
-                        <input type="text" id="incident-when" placeholder="Ex: Esta semana, mês passado..." required>
+                        <input type="datetime-local" id="incident-when" required>
                     </div>
                     <div class="form-group">
                         <label for="incident-details">Detalhes do Relato *</label>
@@ -742,6 +817,17 @@
                         <div class="stat-label">Pais que Completaram o Guia</div>
                     </div>
                 </div>
+
+                <!-- Grade Ranking -->
+                <div class="grade-ranking">
+                    <h3>📈 Relatos por Turma (Ranking)</h3>
+                    <ul class="ranking-list" id="grade-ranking-list">
+                        <li class="ranking-item">
+                            <span>Nenhuma turma registrada ainda.</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="filter-bar">
                     <select id="filter-grade">
                         <option value="all">Todas as Turmas</option>
@@ -784,6 +870,16 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for Report Details -->
+    <div class="modal-overlay" id="report-modal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2>📋 Detalhes do Relato</h2>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
     <script>
         // Data storage
         let reports = [];
@@ -891,23 +987,26 @@
                 document.getElementById('admin-section').classList.add('active');
                 updateAdminStats();
                 renderReports();
+                updateGradeRanking();
             }
         }
         function handleReportSubmit(e) {
             e.preventDefault();
             const emotionScale = parseInt(document.getElementById('emotion-scale').value);
             const contactReason = document.getElementById('contact-reason').value;
+            const incidentWhenInput = document.getElementById('incident-when').value;
+            // Format datetime for display
+            const incidentWhen = formatDateTimeForDisplay(incidentWhenInput);
             const report = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString('pt-BR'),
                 parentName: document.getElementById('parent-name').value,
                 parentPhone: document.getElementById('parent-phone').value,
-                parentEmail: document.getElementById('parent-email').value,
                 studentName: document.getElementById('student-name').value,
                 studentGrade: document.getElementById('student-grade').value,
                 contactReason: contactReason,
                 incidentLocation: document.getElementById('incident-location').value,
-                incidentWhen: document.getElementById('incident-when').value,
+                incidentWhen: incidentWhen,
                 incidentDetails: document.getElementById('incident-details').value,
                 emotionScale: emotionScale,
                 psychologicalSupport: document.getElementById('psychological-support').value,
@@ -920,6 +1019,17 @@
             document.getElementById('emotion-value').textContent = '5';
             // Redirect to admin to see the report
             window.location.href = '?view=admin';
+        }
+        function formatDateTimeForDisplay(dateTimeLocal) {
+            if (!dateTimeLocal) return '';
+            const date = new Date(dateTimeLocal);
+            return date.toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
         function calculateRiskLevel(emotionScale, contactReason) {
             if (emotionScale >= 8 && contactReason === 'victim') return 'high';
@@ -945,6 +1055,26 @@
                 option.textContent = grade;
                 gradeFilter.appendChild(option);
             });
+        }
+        function updateGradeRanking() {
+            const gradeCounts = {};
+            reports.forEach(report => {
+                gradeCounts[report.studentGrade] = (gradeCounts[report.studentGrade] || 0) + 1;
+            });
+            const sortedGrades = Object.entries(gradeCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10); // Top 10
+            const rankingList = document.getElementById('grade-ranking-list');
+            if (sortedGrades.length === 0) {
+                rankingList.innerHTML = '<li class="ranking-item"><span>Nenhuma turma registrada ainda.</span></li>';
+                return;
+            }
+            rankingList.innerHTML = sortedGrades.map(([grade, count], index) => `
+                <li class="ranking-item">
+                    <span><span class="ranking-number">${index + 1}.</span> ${grade}</span>
+                    <span>${count} ${count === 1 ? 'relato' : 'relatos'}</span>
+                </li>
+            `).join('');
         }
         function renderReports(filteredReports = null) {
             const reportsToRender = filteredReports || reports;
@@ -1023,23 +1153,25 @@
             const report = reports.find(r => r.id === reportId);
             if (!report) return;
             const details = `
-📋 DETALHES DO RELATO
-📅 Data: ${report.date}
-👤 Responsável: ${report.parentName}
-📞 Telefone: ${report.parentPhone}
-📧 E-mail: ${report.parentEmail}
-👨‍🎓 Aluno(a): ${report.studentName}
-🏫 Turma: ${report.studentGrade}
-🎯 Motivo: ${getReasonLabel(report.contactReason)}
-📍 Local: ${report.incidentLocation}
-🕐 Quando: ${report.incidentWhen}
-💭 Relato:
-${report.incidentDetails}
-😟 Nível Emocional: ${report.emotionScale}/10
-🆘 Risco: ${getRiskLabel(report.riskLevel).toUpperCase()}
-🧠 Apoio Psicológico: ${report.psychologicalSupport === 'yes' ? 'Sim' : report.psychologicalSupport === 'no' ? 'Não' : 'Talvez'}
+                <p><strong>📅 Data:</strong> ${report.date}</p>
+                <p><strong>👤 Responsável:</strong> ${report.parentName}</p>
+                <p><strong>📞 Telefone:</strong> ${report.parentPhone}</p>
+                <p><strong>👨‍🎓 Aluno(a):</strong> ${report.studentName}</p>
+                <p><strong>🏫 Turma:</strong> ${report.studentGrade}</p>
+                <p><strong>🎯 Motivo:</strong> ${getReasonLabel(report.contactReason)}</p>
+                <p><strong>📍 Local:</strong> ${report.incidentLocation}</p>
+                <p><strong>🕐 Quando:</strong> ${report.incidentWhen}</p>
+                <p><strong>💭 Relato:</strong></p>
+                <p style="margin-left: 20px; margin-top: 8px;">${report.incidentDetails}</p>
+                <p><strong>😟 Nível Emocional:</strong> ${report.emotionScale}/10</p>
+                <p><strong>🆘 Risco:</strong> ${getRiskLabel(report.riskLevel).toUpperCase()}</p>
+                <p><strong>🧠 Apoio Psicológico:</strong> ${report.psychologicalSupport === 'yes' ? 'Sim' : report.psychologicalSupport === 'no' ? 'Não' : 'Talvez'}</p>
             `;
-            alert(details);
+            document.getElementById('modal-content').innerHTML = details;
+            document.getElementById('report-modal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('report-modal').classList.remove('active');
         }
         function loadSampleData() {
             // Sample data for demonstration
@@ -1050,12 +1182,11 @@ ${report.incidentDetails}
                     date: '01/10/2025',
                     parentName: 'Maria Silva',
                     parentPhone: '(11) 98765-4321',
-                    parentEmail: 'maria@email.com',
                     studentName: 'João Silva',
                     studentGrade: '7º Ano B',
                     contactReason: 'victim',
                     incidentLocation: 'playground',
-                    incidentWhen: 'Esta semana',
+                    incidentWhen: '01/10/2025 14:30',
                     incidentDetails: 'Meu filho relatou que está sendo excluído do grupo durante o recreio.',
                     emotionScale: 8,
                     psychologicalSupport: 'yes',
@@ -1067,12 +1198,11 @@ ${report.incidentDetails}
                     date: '02/10/2025',
                     parentName: 'Carlos Oliveira',
                     parentPhone: '(11) 91234-5678',
-                    parentEmail: 'carlos@email.com',
                     studentName: 'Ana Oliveira',
                     studentGrade: '8º Ano A',
                     contactReason: 'witness',
                     incidentLocation: 'corridor',
-                    incidentWhen: 'Mês passado',
+                    incidentWhen: '02/10/2025 10:15',
                     incidentDetails: 'Minha filha viu colegas fazendo comentários maldosos sobre outra aluna.',
                     emotionScale: 5,
                     psychologicalSupport: 'maybe',
@@ -1084,16 +1214,31 @@ ${report.incidentDetails}
                     date: '03/10/2025',
                     parentName: 'Patricia Santos',
                     parentPhone: '(11) 99876-5432',
-                    parentEmail: 'patricia@email.com',
                     studentName: 'Pedro Santos',
                     studentGrade: '6º Ano C',
                     contactReason: 'victim',
                     incidentLocation: 'online',
-                    incidentWhen: 'Ontem',
+                    incidentWhen: '03/10/2025 18:45',
                     incidentDetails: 'Meu filho está recebendo mensagens ofensivas em grupo de WhatsApp da turma.',
                     emotionScale: 9,
                     psychologicalSupport: 'yes',
                     riskLevel: 'high',
+                    status: 'pending'
+                },
+                {
+                    id: 4,
+                    date: '04/10/2025',
+                    parentName: 'Roberto Almeida',
+                    parentPhone: '(11) 98765-1234',
+                    studentName: 'Lucas Almeida',
+                    studentGrade: '7º Ano B',
+                    contactReason: 'aggressor',
+                    incidentLocation: 'classroom',
+                    incidentWhen: '04/10/2025 09:20',
+                    incidentDetails: 'Meu filho foi chamado para conversar com a coordenação por empurrar colegas.',
+                    emotionScale: 6,
+                    psychologicalSupport: 'yes',
+                    riskLevel: 'medium',
                     status: 'pending'
                 }
             ];
@@ -1101,13 +1246,3 @@ ${report.incidentDetails}
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
