@@ -514,7 +514,6 @@
             height: 100%;
             object-fit: contain;
         }
-
         /* Modal Styles */
         .modal-overlay {
             position: fixed;
@@ -568,7 +567,6 @@
         .close-modal:hover {
             color: var(--text-primary);
         }
-
         /* Grade Ranking */
         .grade-ranking {
             margin-top: 30px;
@@ -601,7 +599,6 @@
             color: var(--primary);
             margin-right: 10px;
         }
-
         /* Location Analysis */
         .location-analysis {
             margin-top: 30px;
@@ -657,7 +654,6 @@
             color: var(--text-primary);
             font-size: 0.95rem;
         }
-
         /* Improved Admin Panel Design */
         .admin-header {
             display: flex;
@@ -676,7 +672,6 @@
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-        
         .section-title {
             font-size: 1.25rem;
             color: var(--primary);
@@ -685,7 +680,6 @@
             padding-bottom: 8px;
             border-bottom: 2px solid var(--primary-light);
         }
-        
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -703,7 +697,6 @@
             font-size: 1.1rem;
             margin: 10px 0;
         }
-        
         /* Status Dropdown Styling */
         .status-dropdown {
             padding: 6px 12px;
@@ -723,7 +716,6 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-        
         /* Action Button Styling */
         .action-btn {
             padding: 6px 12px;
@@ -989,7 +981,6 @@
                     <h2>📊 Painel Administrativo - Radar Escolar</h2>
                     <p>Visualização e gerenciamento de relatos recebidos</p>
                 </div>
-                
                 <div class="stats-grid">
                     <div class="stat-card danger">
                         <div class="stat-value" id="high-risk-count">0</div>
@@ -1008,7 +999,6 @@
                         <div class="stat-label">Pais que Completaram o Guia</div>
                     </div>
                 </div>
-
                 <!-- Grade Ranking -->
                 <div class="grade-ranking">
                     <h3>📈 Relatos por Turma (Ranking)</h3>
@@ -1018,7 +1008,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- Location Analysis -->
                 <div class="location-analysis">
                     <h3>📍 Análise por Local de Ocorrência</h3>
@@ -1028,7 +1017,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="filter-bar">
                     <select id="filter-grade">
                         <option value="all">Todas as Turmas</option>
@@ -1046,7 +1034,6 @@
                         <option value="closed">Fechado</option>
                     </select>
                 </div>
-                
                 <div class="section-title">Relatórios Recentes</div>
                 <div style="overflow-x: auto;">
                     <table class="reports-table">
@@ -1073,7 +1060,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal for Report Details -->
     <div class="modal-overlay" id="report-modal">
         <div class="modal">
@@ -1082,6 +1068,13 @@
             <div id="modal-content"></div>
         </div>
     </div>
+
+    <!-- VLibras - Acessibilidade em Libras -->
+    <div vw="enabled" style="z-index: 2147483647; position: fixed; bottom: 0; right: 0;"></div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
     <script>
         // Data storage
@@ -1117,24 +1110,38 @@
             }
         }
         function setupEventListeners() {
-            // Step 1 checkbox
-            document.getElementById('momento-check').addEventListener('change', function() {
-                document.getElementById('step1-next').disabled = !this.checked;
-            });
-            document.getElementById('step1-next').addEventListener('click', nextStep);
-            // Emotion scale slider
+            // Step 1 checkbox (só existe na seção de onboarding)
+            const momentoCheck = document.getElementById('momento-check');
+            if (momentoCheck) {
+                momentoCheck.addEventListener('change', function() {
+                    const nextBtn = document.getElementById('step1-next');
+                    if (nextBtn) nextBtn.disabled = !this.checked;
+                });
+            }
+
+            // Emotion slider (só existe no formulário de relato)
             const emotionSlider = document.getElementById('emotion-scale');
             const emotionValue = document.getElementById('emotion-value');
-            emotionSlider.addEventListener('input', function() {
-                emotionValue.textContent = this.value;
-                emotionValue.style.color = getEmotionColor(parseInt(this.value));
-            });
+            if (emotionSlider && emotionValue) {
+                emotionSlider.addEventListener('input', function() {
+                    emotionValue.textContent = this.value;
+                    emotionValue.style.color = getEmotionColor(parseInt(this.value));
+                });
+            }
+
             // Report form
-            document.getElementById('report-form').addEventListener('submit', handleReportSubmit);
-            // Filter listeners
-            document.getElementById('filter-grade').addEventListener('change', filterReports);
-            document.getElementById('filter-risk').addEventListener('change', filterReports);
-            document.getElementById('filter-status').addEventListener('change', filterReports);
+            const reportForm = document.getElementById('report-form');
+            if (reportForm) {
+                reportForm.addEventListener('submit', handleReportSubmit);
+            }
+
+            // Filtros (só existem no painel admin)
+            const filterGrade = document.getElementById('filter-grade');
+            const filterRisk = document.getElementById('filter-risk');
+            const filterStatus = document.getElementById('filter-status');
+            if (filterGrade) filterGrade.addEventListener('change', filterReports);
+            if (filterRisk) filterRisk.addEventListener('change', filterReports);
+            if (filterStatus) filterStatus.addEventListener('change', filterReports);
         }
         function getEmotionColor(value) {
             if (value >= 8) return '#dc2626';
@@ -1519,14 +1526,5 @@
             ];
         }
     </script>
-    <!-- Widget de acessibilidade VLibras -->
-<div vw="enabled" class="fixed bottom-0 right-0"></div>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>
-  new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>
 </body>
 </html>
-
-
-
