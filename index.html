@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (via CDN for standalone functionality) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js for Admin Dashboard -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Icons -->
@@ -36,20 +36,11 @@
                             700: '#6d28d9',
                             900: '#4c1d95',
                         },
-                        danger: '#ef4444',
-                        success: '#22c55e',
-                        warning: '#f59e0b',
                     },
                     animation: {
-                        'fade-in': 'fadeIn 0.5s ease-out',
                         'slide-up': 'slideUp 0.5s ease-out',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
                         slideUp: {
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' },
@@ -61,52 +52,25 @@
     </script>
 
     <style>
-        /* Custom Scrollbar for Admin Table */
-        .custom-scroll::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scroll::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: #c4b5fd;
-            border-radius: 10px;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb:hover {
-            background: #8b5cf6;
-        }
-
-        /* Range Slider Styling */
-        input[type=range] {
-            -webkit-appearance: none; 
-            background: transparent; 
-        }
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        /* Slider Styling */
+        input[type=range] { -webkit-appearance: none; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #7c3aed;
-            cursor: pointer;
-            margin-top: -10px; 
+            -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
+            background: #7c3aed; cursor: pointer; margin-top: -10px; 
             box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
         }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            cursor: pointer;
-            background: #ede9fe;
-            border-radius: 2px;
+            width: 100%; height: 4px; cursor: pointer; background: #ede9fe; border-radius: 2px;
         }
 
         /* Card Transitions */
-        .guide-card {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-        }
-        .hidden-card {
-            display: none;
-        }
+        .guide-card { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease; }
+        .hidden-card { display: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
@@ -121,11 +85,9 @@
                     </div>
                     <span class="font-heading font-bold text-xl text-brand-900 tracking-tight">S.O.S <span class="text-brand-600">Escola</span></span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="app.router('admin')" class="text-xs font-semibold text-slate-400 hover:text-brand-600 uppercase tracking-wider transition-colors">
-                        Acesso Admin
-                    </button>
-                </div>
+                <button onclick="app.router('admin')" class="text-xs font-semibold text-slate-400 hover:text-brand-600 uppercase tracking-wider transition-colors">
+                    Admin
+                </button>
             </div>
         </div>
     </nav>
@@ -137,33 +99,33 @@
         <section id="view-landing" class="absolute inset-0 overflow-y-auto bg-white z-40 flex flex-col items-center justify-center p-6 text-center transition-all duration-500">
             <div class="max-w-md w-full animate-slide-up">
                 <div class="mb-8 relative inline-block">
-                    <div class="absolute inset-0 bg-brand-200 rounded-full blur-2xl opacity-50 animate-pulse-slow"></div>
+                    <div class="absolute inset-0 bg-brand-200 rounded-full blur-2xl opacity-50 animate-pulse"></div>
                     <img src="https://framerusercontent.com/images/flEekjecdaX61MjQSetTtP9Og.jpg" alt="Hero" class="relative w-64 h-64 object-cover rounded-3xl shadow-2xl rotate-3 border-4 border-white mx-auto">
                 </div>
                 
                 <h1 class="font-heading text-3xl font-bold text-slate-900 mb-4">
-                    Juntos por um ambiente <span class="text-brand-600">mais seguro</span>
+                    Olá, Pais e <span class="text-brand-600">Responsáveis</span>
                 </h1>
                 
-                <p class="text-slate-500 text-lg mb-8 leading-relaxed">
-                    Identificar o bullying é o primeiro passo. Criamos um guia interativo para ajudar você a conversar com seu filho e um canal seguro para relatos.
+                <p class="text-slate-500 text-base mb-6 leading-relaxed">
+                    Nenhuma escola está imune à violência. É nosso dever coletivo intervir. Criamos este aplicativo para guiar você na conversa com seu filho e facilitar relatos seguros.
                 </p>
 
                 <div class="space-y-4">
                     <button onclick="app.router('guide')" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-brand-500/30 transform transition hover:-translate-y-1 flex items-center justify-center gap-3">
                         <i class="ph ph-book-open-text text-xl"></i>
-                        Iniciar Guia de Orientação
+                        Começar o Guia
                     </button>
                     
                     <button onclick="app.router('form')" class="w-full bg-white border-2 border-slate-100 hover:border-brand-200 text-slate-600 font-bold py-4 px-6 rounded-xl transition-colors flex items-center justify-center gap-3">
                         <i class="ph ph-pencil-simple-line text-xl"></i>
-                        Já sei o que relatar
+                        Pular para o Relato
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- VIEW: INTERACTIVE GUIDE (Mobile Focused) -->
+        <!-- VIEW: INTERACTIVE GUIDE (Conteúdo Rico Restaurado) -->
         <section id="view-guide" class="hidden absolute inset-0 bg-brand-50 z-30 flex flex-col">
             <!-- Progress Bar -->
             <div class="w-full h-1.5 bg-slate-200">
@@ -173,124 +135,176 @@
             <!-- Card Container -->
             <div class="flex-grow flex items-center justify-center p-4 overflow-hidden relative">
                 
-                <!-- CARD 1: Timing -->
-                <div class="guide-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden" data-step="1">
-                    <div class="h-48 bg-brand-100 relative">
+                <!-- CARD 1: O Momento Certo -->
+                <div class="guide-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden max-w-md mx-auto" data-step="1">
+                    <div class="h-40 bg-brand-100 relative shrink-0">
                         <img src="https://framerusercontent.com/images/flEekjecdaX61MjQSetTtP9Og.jpg" class="w-full h-full object-cover opacity-90">
                         <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/60 to-transparent w-full">
-                            <span class="text-white font-bold text-sm uppercase tracking-wider bg-brand-600 px-2 py-1 rounded-md">Passo 1 de 4</span>
+                            <span class="text-white font-bold text-xs uppercase tracking-wider bg-brand-600 px-2 py-1 rounded-md">Passo 1 de 4</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-3">O Momento Certo</h2>
-                        <p class="text-slate-600 mb-4 flex-grow">Conversas sensíveis exigem calma. Evite perguntar assim que a criança chega da escola ou na frente de outras pessoas.</p>
+                    <div class="p-6 flex-grow flex flex-col overflow-y-auto custom-scroll">
+                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-2">O Momento Certo</h2>
+                        <p class="text-slate-600 text-sm mb-4">
+                            Para criar um ambiente propício ao diálogo, a escolha do momento é crucial. Evite períodos de tensão, pressa ou com plateia.
+                        </p>
                         
-                        <div class="bg-brand-50 p-4 rounded-xl mb-4 border border-brand-100">
-                            <h3 class="font-bold text-brand-700 text-sm mb-2 flex items-center gap-2">
-                                <i class="ph ph-check-circle text-lg"></i> Boas Práticas:
-                            </h3>
-                            <ul class="text-sm text-slate-600 space-y-1">
-                                <li>• Durante um passeio de carro</li>
-                                <li>• Antes de dormir</li>
-                                <li>• Enquanto cozinham juntos</li>
-                            </ul>
+                        <!-- Info Box -->
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r-lg mb-4">
+                            <h3 class="text-blue-800 font-bold text-sm mb-1">Por que isso importa?</h3>
+                            <p class="text-blue-700 text-xs">Conversas sensíveis precisam de calma. Se a criança sentir que você está com pressa, ela se fechará.</p>
                         </div>
 
-                        <button onclick="app.guideNext()" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold mt-auto flex justify-between items-center px-6">
-                            <span>Entendi</span>
+                        <h3 class="font-bold text-slate-700 text-sm mb-2 mt-2">✅ Exemplos de bons momentos:</h3>
+                        <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                            <li class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg"><i class="ph ph-car text-brand-500"></i> Durante um passeio de carro</li>
+                            <li class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg"><i class="ph ph-cooking-pot text-brand-500"></i> Cozinhando juntos</li>
+                            <li class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg"><i class="ph ph-moon-stars text-brand-500"></i> Antes de dormir, no quarto</li>
+                            <li class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg"><i class="ph ph-game-controller text-brand-500"></i> Durante um hobby compartilhado</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 shrink-0">
+                        <button onclick="app.guideNext()" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold flex justify-between items-center px-6 shadow-md hover:bg-brand-700 transition">
+                            <span>Vou escolher um momento calmo</span>
                             <i class="ph ph-arrow-right"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- CARD 2: Safe Harbor -->
-                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden" data-step="2">
-                    <div class="h-48 bg-purple-100 relative">
+                <!-- CARD 2: Porto Seguro (Escuta Ativa) -->
+                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden max-w-md mx-auto" data-step="2">
+                    <div class="h-40 bg-purple-100 relative shrink-0">
                         <img src="https://framerusercontent.com/images/k0A1OY9n5Vcd5DkGYmvOuA7eqsI.png" class="w-full h-full object-cover opacity-90">
                         <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/60 to-transparent w-full">
-                            <span class="text-white font-bold text-sm uppercase tracking-wider bg-purple-600 px-2 py-1 rounded-md">Passo 2 de 4</span>
+                            <span class="text-white font-bold text-xs uppercase tracking-wider bg-purple-600 px-2 py-1 rounded-md">Passo 2 de 4</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-3">Porto Seguro</h2>
-                        <p class="text-slate-600 mb-4">Escutar é mais importante que falar. Valide os sentimentos sem julgar ou minimizar a dor.</p>
+                    <div class="p-6 flex-grow flex flex-col overflow-y-auto custom-scroll">
+                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-2">Criando o Porto Seguro</h2>
+                        <p class="text-slate-600 text-sm mb-4">A forma como você escuta é mais importante que o que você diz.</p>
                         
-                        <div class="grid grid-cols-2 gap-3 mb-4">
-                            <div class="bg-red-50 p-3 rounded-lg border border-red-100 text-center">
-                                <i class="ph ph-x-circle text-red-500 text-2xl mb-1"></i>
-                                <p class="text-xs font-bold text-red-700">"Isso é normal"</p>
-                                <p class="text-xs text-red-600 leading-tight">Nunca minimize o problema.</p>
-                            </div>
-                            <div class="bg-green-50 p-3 rounded-lg border border-green-100 text-center">
-                                <i class="ph ph-check-circle text-green-500 text-2xl mb-1"></i>
-                                <p class="text-xs font-bold text-green-700">"Estou aqui"</p>
-                                <p class="text-xs text-green-600 leading-tight">Mostre apoio incondicional.</p>
-                            </div>
+                        <div class="mb-4 space-y-2">
+                            <h3 class="font-bold text-slate-700 text-sm">Princípios da Escuta Ativa:</h3>
+                            <ul class="text-xs text-slate-600 list-disc ml-4 space-y-1">
+                                <li><strong>Valide os sentimentos:</strong> Mostre que entende a dor.</li>
+                                <li><strong>Mantenha contato visual:</strong> Demonstre presença.</li>
+                                <li><strong>Não interrompa:</strong> Deixe o relato fluir.</li>
+                            </ul>
                         </div>
 
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="app.guidePrev()" class="flex-1 bg-slate-100 text-slate-600 py-3 rounded-xl font-bold">Voltar</button>
-                            <button onclick="app.guideNext()" class="flex-1 bg-brand-600 text-white py-3 rounded-xl font-bold">Próximo</button>
+                        <!-- Do's and Don'ts Grid -->
+                        <div class="grid grid-cols-1 gap-3 mb-2">
+                            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500">
+                                <p class="text-xs font-bold text-red-700 uppercase mb-1"><i class="ph ph-x-circle"></i> Evite dizer:</p>
+                                <ul class="text-xs text-red-700 space-y-1">
+                                    <li>"Você está inventando isso."</li>
+                                    <li>"Na minha época era pior."</li>
+                                    <li>"Você precisa ser mais forte."</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+                                <p class="text-xs font-bold text-green-700 uppercase mb-1"><i class="ph ph-check-circle"></i> Prefira dizer:</p>
+                                <ul class="text-xs text-green-700 space-y-1">
+                                    <li>"Eu entendo que isso dói."</li>
+                                    <li>"Estou aqui com você."</li>
+                                    <li>"Obrigado por me contar."</li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 flex gap-3 shrink-0">
+                        <button onclick="app.guidePrev()" class="flex-1 bg-slate-100 text-slate-600 py-3 rounded-xl font-bold text-sm">Voltar</button>
+                        <button onclick="app.guideNext()" class="flex-1 bg-brand-600 text-white py-3 rounded-xl font-bold text-sm shadow-md">Entendi</button>
                     </div>
                 </div>
 
-                <!-- CARD 3: The Question -->
-                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden" data-step="3">
-                    <div class="h-48 bg-indigo-100 relative">
+                <!-- CARD 3: A Pergunta Mágica -->
+                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden max-w-md mx-auto" data-step="3">
+                    <div class="h-40 bg-indigo-100 relative shrink-0">
                         <img src="https://framerusercontent.com/images/WA5UnLqbTWGzeGh3nB6wMV0lqQ.jpg" class="w-full h-full object-cover opacity-90">
                         <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/60 to-transparent w-full">
-                            <span class="text-white font-bold text-sm uppercase tracking-wider bg-indigo-600 px-2 py-1 rounded-md">Passo 3 de 4</span>
+                            <span class="text-white font-bold text-xs uppercase tracking-wider bg-indigo-600 px-2 py-1 rounded-md">Passo 3 de 4</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-3">A Pergunta Mágica</h2>
-                        <p class="text-slate-600 mb-4">Evite perguntas de "Sim" ou "Não". Use perguntas abertas que convidem à narrativa.</p>
+                    <div class="p-6 flex-grow flex flex-col overflow-y-auto custom-scroll">
+                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-2">Como Perguntar?</h2>
+                        <p class="text-slate-600 text-sm mb-4">Perguntas abertas são mais eficazes. Evite perguntas que possam ser respondidas apenas com "Sim" ou "Não".</p>
                         
-                        <div class="space-y-3 mb-6">
-                            <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-50 border-l-4 border-brand-400">
-                                <i class="ph ph-chat-teardrop-text text-brand-500 text-xl mt-0.5"></i>
-                                <div>
-                                    <p class="font-bold text-sm text-slate-700">"O que tem sido mais chato na escola?"</p>
+                        <div class="space-y-4">
+                            <!-- Bad Examples -->
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-400 uppercase mb-2">❌ Evite Perguntas Diretas (Interrogatório)</h3>
+                                <div class="space-y-2">
+                                    <div class="p-3 bg-slate-100 rounded-lg text-slate-500 text-xs italic border border-slate-200">
+                                        "Você está sofrendo bullying?"
+                                    </div>
+                                    <div class="p-3 bg-slate-100 rounded-lg text-slate-500 text-xs italic border border-slate-200">
+                                        "Por que você não tem amigos?"
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-50 border-l-4 border-brand-400">
-                                <i class="ph ph-users-three text-brand-500 text-xl mt-0.5"></i>
-                                <div>
-                                    <p class="font-bold text-sm text-slate-700">"Com quem você gosta de ficar no recreio?"</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="app.guidePrev()" class="flex-1 bg-slate-100 text-slate-600 py-3 rounded-xl font-bold">Voltar</button>
-                            <button onclick="app.guideNext()" class="flex-1 bg-brand-600 text-white py-3 rounded-xl font-bold">Próximo</button>
+                            <!-- Good Examples -->
+                            <div>
+                                <h3 class="text-xs font-bold text-brand-600 uppercase mb-2">✅ Use Perguntas Abertas (Convite)</h3>
+                                <div class="space-y-2">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-indigo-50 border border-indigo-100 shadow-sm">
+                                        <i class="ph ph-chat-circle-dots text-indigo-500 text-lg"></i>
+                                        <p class="font-bold text-xs text-indigo-900">"O que tem sido mais chato na escola ultimamente?"</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-indigo-50 border border-indigo-100 shadow-sm">
+                                        <i class="ph ph-users-three text-indigo-500 text-lg"></i>
+                                        <p class="font-bold text-xs text-indigo-900">"Com quem você mais gosta de conversar no recreio?"</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-indigo-50 border border-indigo-100 shadow-sm">
+                                        <i class="ph ph-magic-wand text-indigo-500 text-lg"></i>
+                                        <p class="font-bold text-xs text-indigo-900">"Se pudesse mudar algo na aula, o que seria?"</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 flex gap-3 shrink-0">
+                        <button onclick="app.guidePrev()" class="flex-1 bg-slate-100 text-slate-600 py-3 rounded-xl font-bold text-sm">Voltar</button>
+                        <button onclick="app.guideNext()" class="flex-1 bg-brand-600 text-white py-3 rounded-xl font-bold text-sm shadow-md">Próximo</button>
                     </div>
                 </div>
 
-                <!-- CARD 4: Processing -->
-                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden" data-step="4">
-                    <div class="h-48 bg-violet-100 relative">
+                <!-- CARD 4: Processamento -->
+                <div class="guide-card hidden-card absolute inset-4 bg-white rounded-3xl shadow-xl flex flex-col overflow-hidden max-w-md mx-auto" data-step="4">
+                    <div class="h-40 bg-violet-100 relative shrink-0">
                         <img src="https://framerusercontent.com/images/hx8YW4igf4rUYjycWK4Vp2Wvr7o.jpg" class="w-full h-full object-cover opacity-90">
                         <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/60 to-transparent w-full">
-                            <span class="text-white font-bold text-sm uppercase tracking-wider bg-violet-600 px-2 py-1 rounded-md">Passo 4 de 4</span>
+                            <span class="text-white font-bold text-xs uppercase tracking-wider bg-violet-600 px-2 py-1 rounded-md">Passo 4 de 4</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col text-center">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
-                            <i class="ph ph-hand-heart text-3xl"></i>
-                        </div>
-                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-2">Você está pronto!</h2>
-                        <p class="text-slate-600 mb-6">Agradeça a confiança do seu filho e diga que vocês resolverão isso juntos. Agora, use o formulário para nos dar detalhes técnicos.</p>
+                    <div class="p-6 flex-grow flex flex-col overflow-y-auto custom-scroll">
+                        <h2 class="font-heading text-2xl font-bold text-brand-900 mb-2">O Processamento</h2>
+                        <p class="text-slate-600 text-sm mb-4">Se o seu filho se abrir, este é o momento mais delicado. <strong>Acolha antes de agir.</strong></p>
                         
-                        <div class="flex flex-col gap-3 mt-auto">
-                            <button onclick="app.router('form')" class="w-full bg-brand-600 hover:bg-brand-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2">
-                                <i class="ph ph-note-pencil text-xl"></i>
-                                Preencher Relato
-                            </button>
-                            <button onclick="app.guidePrev()" class="text-slate-400 font-semibold text-sm">Voltar ao passo anterior</button>
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4">
+                            <h3 class="text-orange-800 font-bold text-xs flex items-center gap-1"><i class="ph ph-warning"></i> Importante</h3>
+                            <p class="text-orange-700 text-xs mt-1">Não prometa resolver tudo "agora". Não vá à escola confrontar ninguém sem um plano.</p>
                         </div>
+
+                        <h3 class="font-bold text-slate-700 text-sm mb-2">Roteiro de Ação:</h3>
+                        <ol class="list-decimal list-inside text-xs text-slate-600 space-y-2 mb-4 font-medium">
+                            <li><span class="text-brand-600">Agradeça a confiança:</span> "Obrigado por me contar."</li>
+                            <li><span class="text-brand-600">Valide:</span> "Sinto muito que esteja passando por isso."</li>
+                            <li><span class="text-brand-600">Busque ajuda conjunta:</span> "Vamos pensar juntos na solução."</li>
+                            <li><span class="text-brand-600">Oficialize:</span> Use o formulário a seguir.</li>
+                        </ol>
+
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 italic text-slate-500 text-xs text-center">
+                            "Você foi muito corajoso. A escola tem pessoas preparadas para nos ajudar."
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 flex flex-col gap-2 shrink-0">
+                        <button onclick="app.router('form')" class="w-full bg-brand-600 hover:bg-brand-700 text-white py-3 rounded-xl font-bold shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2">
+                            <i class="ph ph-note-pencil text-lg"></i>
+                            Concluir e Preencher Relato
+                        </button>
+                        <button onclick="app.guidePrev()" class="text-slate-400 font-semibold text-xs py-1">Rever passo anterior</button>
                     </div>
                 </div>
 
@@ -300,43 +314,43 @@
         <!-- VIEW: REPORT FORM -->
         <section id="view-form" class="hidden absolute inset-0 overflow-y-auto bg-slate-50 z-30">
             <div class="max-w-2xl mx-auto p-4 pb-20">
-                <button onclick="app.router('landing')" class="mb-6 flex items-center gap-2 text-slate-500 font-semibold hover:text-brand-600">
+                <button onclick="app.router('landing')" class="mb-6 flex items-center gap-2 text-slate-500 font-semibold hover:text-brand-600 text-sm">
                     <i class="ph ph-arrow-left"></i> Voltar ao início
                 </button>
 
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-fade-in">
-                    <div class="flex items-center gap-4 mb-8">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 animate-slide-up">
+                    <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 shrink-0">
                             <i class="ph ph-file-text text-2xl"></i>
                         </div>
                         <div>
                             <h2 class="font-heading text-2xl font-bold text-slate-900">Formulário de Relato</h2>
-                            <p class="text-slate-500 text-sm">Seu relato é confidencial e será tratado com prioridade.</p>
+                            <p class="text-slate-500 text-xs">Informações confidenciais.</p>
                         </div>
                     </div>
 
                     <form id="report-form" onsubmit="app.submitForm(event)">
                         <!-- Contact Info -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div class="space-y-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Seu Nome</label>
-                                <input type="text" id="parent-name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="Nome do Responsável">
+                                <input type="text" id="parent-name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm" placeholder="Nome do Responsável">
                             </div>
-                            <div class="space-y-2">
+                            <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Telefone</label>
-                                <input type="tel" id="parent-phone" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="(00) 00000-0000">
+                                <input type="tel" id="parent-phone" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm" placeholder="(00) 00000-0000">
                             </div>
                         </div>
 
                         <!-- Student Info -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div class="space-y-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Nome do Aluno(a)</label>
-                                <input type="text" id="student-name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="Nome Completo">
+                                <input type="text" id="student-name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm" placeholder="Nome Completo">
                             </div>
-                            <div class="space-y-2">
+                            <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Turma</label>
-                                <select id="student-grade" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white">
+                                <select id="student-grade" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm">
                                     <option value="">Selecione...</option>
                                     <option value="6º Ano A">6º Ano A</option>
                                     <option value="6º Ano B">6º Ano B</option>
@@ -348,23 +362,23 @@
                             </div>
                         </div>
 
-                        <hr class="border-slate-100 my-8">
+                        <hr class="border-slate-100 my-6">
 
                         <!-- Incident Info -->
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-2">
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
                                     <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">O que aconteceu?</label>
-                                    <select id="contact-reason" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white">
+                                    <select id="contact-reason" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm">
                                         <option value="victim">Aluno é Vítima</option>
                                         <option value="witness">Aluno Testemunhou</option>
                                         <option value="aggressor">Comportamento Agressivo</option>
                                         <option value="other">Outro</option>
                                     </select>
                                 </div>
-                                <div class="space-y-2">
+                                <div class="space-y-1">
                                     <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Local do Ocorrido</label>
-                                    <select id="incident-location" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white">
+                                    <select id="incident-location" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm">
                                         <option value="classroom">Sala de Aula</option>
                                         <option value="playground">Pátio / Recreio</option>
                                         <option value="bathroom">Banheiro</option>
@@ -376,27 +390,27 @@
 
                             <!-- Emoji Mood Slider -->
                             <div class="bg-brand-50 rounded-xl p-6 text-center border border-brand-100">
-                                <label class="text-sm font-bold text-brand-800 mb-4 block">Nível de Angústia do Aluno</label>
+                                <label class="text-xs font-bold text-brand-800 mb-2 block uppercase">Nível de Angústia do Aluno</label>
                                 <div class="text-5xl mb-4 transition-transform hover:scale-110 duration-200" id="mood-emoji">😐</div>
                                 <input type="range" id="emotion-scale" min="1" max="10" value="5" class="w-full max-w-sm mx-auto block accent-brand-600">
-                                <div class="flex justify-between text-xs text-brand-400 mt-2 max-w-sm mx-auto px-1">
-                                    <span>Tranquilo</span>
-                                    <span>Muito Abalado</span>
+                                <div class="flex justify-between text-xs text-brand-400 mt-2 max-w-sm mx-auto px-1 font-bold">
+                                    <span>Tranquilo (1)</span>
+                                    <span>Muito Abalado (10)</span>
                                 </div>
                             </div>
 
-                            <div class="space-y-2">
+                            <div class="space-y-1">
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Detalhes do Relato</label>
-                                <textarea id="incident-details" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white resize-none" placeholder="Descreva o que foi relatado com o máximo de detalhes possível..."></textarea>
+                                <textarea id="incident-details" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50 focus:bg-white resize-none text-sm" placeholder="Descreva o que foi relatado com o máximo de detalhes possível..."></textarea>
                             </div>
                             
                             <div class="flex items-start gap-3 p-4 bg-orange-50 rounded-lg border border-orange-100">
                                 <input type="checkbox" id="auth-psych" class="mt-1 w-5 h-5 text-brand-600 rounded focus:ring-brand-500 border-gray-300">
-                                <label for="auth-psych" class="text-sm text-slate-700">Autorizo a equipe de psicologia escolar a abordar meu filho(a) delicadamente sobre este assunto, se necessário.</label>
+                                <label for="auth-psych" class="text-xs text-slate-700 font-medium">Autorizo a equipe de psicologia escolar a abordar meu filho(a) delicadamente sobre este assunto, se necessário.</label>
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full mt-8 bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-brand-500/30 transition-all flex items-center justify-center gap-2">
+                        <button type="submit" class="w-full mt-6 bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-brand-500/30 transition-all flex items-center justify-center gap-2">
                             <span>Enviar Relato Seguro</span>
                             <i class="ph ph-paper-plane-right text-xl"></i>
                         </button>
@@ -446,14 +460,14 @@
                             <i class="ph ph-warning-circle-fill"></i>
                             <span id="urgent-alert-count">0 Casos Urgentes</span>
                         </div>
-                        <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="Admin">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center">
+                            <i class="ph ph-user text-slate-400"></i>
                         </div>
                     </div>
                 </header>
 
                 <!-- Scrollable Content -->
-                <div class="flex-grow overflow-y-auto p-8 custom-scroll">
+                <div class="flex-grow overflow-y-auto p-4 md:p-8 custom-scroll">
                     
                     <!-- Stats Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -461,7 +475,7 @@
                             <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                 <i class="ph ph-warning-octagon text-6xl text-red-500"></i>
                             </div>
-                            <p class="text-sm font-bold text-slate-400 uppercase">Alto Risco</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Alto Risco</p>
                             <h3 class="text-3xl font-bold text-red-600 mt-2" id="stat-high">0</h3>
                             <p class="text-xs text-slate-400 mt-2">Requer ação imediata</p>
                         </div>
@@ -470,7 +484,7 @@
                             <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                 <i class="ph ph-warning text-6xl text-orange-500"></i>
                             </div>
-                            <p class="text-sm font-bold text-slate-400 uppercase">Médio Risco</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Médio Risco</p>
                             <h3 class="text-3xl font-bold text-orange-500 mt-2" id="stat-medium">0</h3>
                             <p class="text-xs text-slate-400 mt-2">Monitoramento constante</p>
                         </div>
@@ -479,14 +493,14 @@
                             <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                 <i class="ph ph-check-circle text-6xl text-green-500"></i>
                             </div>
-                            <p class="text-sm font-bold text-slate-400 uppercase">Resolvidos</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Resolvidos</p>
                             <h3 class="text-3xl font-bold text-green-600 mt-2" id="stat-resolved">0</h3>
                             <p class="text-xs text-slate-400 mt-2">Neste mês</p>
                         </div>
 
                         <div class="bg-brand-600 p-6 rounded-xl shadow-lg shadow-brand-500/30 text-white relative overflow-hidden">
                             <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white opacity-10 rounded-full"></div>
-                            <p class="text-sm font-bold opacity-80 uppercase">Total de Relatos</p>
+                            <p class="text-xs font-bold opacity-80 uppercase">Total de Relatos</p>
                             <h3 class="text-3xl font-bold mt-2" id="stat-total">0</h3>
                             <p class="text-xs opacity-70 mt-2">Base de dados atualizada</p>
                         </div>
@@ -495,13 +509,13 @@
                     <!-- Charts Area -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm col-span-2">
-                            <h3 class="font-bold text-slate-800 mb-4">Ocorrências por Local</h3>
+                            <h3 class="font-bold text-slate-800 mb-4 text-sm">Ocorrências por Local</h3>
                             <div class="h-64">
                                 <canvas id="locationChart"></canvas>
                             </div>
                         </div>
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                            <h3 class="font-bold text-slate-800 mb-4">Distribuição de Risco</h3>
+                            <h3 class="font-bold text-slate-800 mb-4 text-sm">Distribuição de Risco</h3>
                             <div class="h-64 flex items-center justify-center">
                                 <canvas id="riskChart"></canvas>
                             </div>
@@ -511,9 +525,9 @@
                     <!-- Recent Reports Table -->
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                         <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-                            <h3 class="font-bold text-slate-800">Entradas Recentes</h3>
+                            <h3 class="font-bold text-slate-800 text-sm">Entradas Recentes</h3>
                             <div class="flex gap-2">
-                                <select id="filter-risk" onchange="app.filterTable()" class="text-xs border-slate-300 rounded-lg p-2 bg-white">
+                                <select id="filter-risk" onchange="app.filterTable()" class="text-xs border-slate-300 rounded-lg p-2 bg-white outline-none">
                                     <option value="all">Todos os Riscos</option>
                                     <option value="high">Alto</option>
                                     <option value="medium">Médio</option>
@@ -550,17 +564,15 @@
         const app = {
             data: {
                 currentStep: 1,
-                reports: [], // Stores report objects
-                charts: {} // Stores chart instances
+                reports: [], 
+                charts: {} 
             },
 
             // --- INITIALIZATION ---
             init: function() {
-                // Load some mock data for demo purposes
                 this.loadMockData();
                 this.setupEmojiSlider();
                 
-                // Check URL params for view routing (e.g. returning users)
                 const urlParams = new URLSearchParams(window.location.search);
                 const view = urlParams.get('view') || 'landing';
                 this.router(view);
@@ -568,21 +580,13 @@
 
             // --- ROUTER & NAVIGATION ---
             router: function(viewName) {
-                // Hide all views
                 ['view-landing', 'view-guide', 'view-form', 'view-admin'].forEach(id => {
                     document.getElementById(id).classList.add('hidden');
-                    // Reset animations if needed
-                    document.getElementById(id).classList.remove('animate-slide-up');
                 });
 
-                // Show selected view
                 const selected = document.getElementById(`view-${viewName}`);
                 selected.classList.remove('hidden');
                 
-                // Add entry animation
-                if(viewName === 'landing') selected.classList.add('animate-slide-up');
-
-                // Logic specific to view
                 if (viewName === 'guide') {
                     this.data.currentStep = 1;
                     this.updateGuideUI();
@@ -591,14 +595,13 @@
                     this.renderAdminDashboard();
                 }
 
-                // Update URL history without reload
+                // Update URL history
                 const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?view=' + viewName;
                 window.history.pushState({path:newUrl},'',newUrl);
             },
 
             // --- GUIDE LOGIC ---
             updateGuideUI: function() {
-                // Update Cards
                 document.querySelectorAll('.guide-card').forEach(card => {
                     const step = parseInt(card.dataset.step);
                     if (step === this.data.currentStep) {
@@ -611,8 +614,6 @@
                         card.style.opacity = '0';
                     }
                 });
-
-                // Update Progress Bar
                 const progress = (this.data.currentStep / 4) * 100;
                 document.getElementById('guide-progress').style.width = `${progress}%`;
             },
@@ -640,7 +641,6 @@
                 slider.addEventListener('input', (e) => {
                     const val = e.target.value;
                     emojiDisplay.innerText = emojis[val - 1];
-                    // Change color based on intensity
                     if(val < 4) emojiDisplay.className = "text-5xl mb-4 transition-transform hover:scale-110 duration-200 text-green-500";
                     else if(val < 8) emojiDisplay.className = "text-5xl mb-4 transition-transform hover:scale-110 duration-200 text-orange-500";
                     else emojiDisplay.className = "text-5xl mb-4 transition-transform hover:scale-110 duration-200 text-red-600 animate-pulse";
@@ -650,11 +650,11 @@
             submitForm: function(e) {
                 e.preventDefault();
                 
-                // Collect Data
                 const intensity = parseInt(document.getElementById('emotion-scale').value);
                 const reason = document.getElementById('contact-reason').value;
+                const loc = document.getElementById('incident-location').value;
                 
-                // Simple Risk Calc Algorithm
+                // Risk Algorithm
                 let risk = 'low';
                 if (intensity >= 8 || reason === 'victim') risk = 'high';
                 else if (intensity >= 5) risk = 'medium';
@@ -664,24 +664,22 @@
                     date: new Date().toLocaleDateString('pt-BR'),
                     student: document.getElementById('student-name').value,
                     grade: document.getElementById('student-grade').value,
-                    location: document.getElementById('incident-location').value,
+                    location: loc,
                     reason: reason,
                     risk: risk,
                     intensity: intensity,
                     status: 'pending'
                 };
 
-                this.data.reports.unshift(newReport); // Add to beginning
+                this.data.reports.unshift(newReport);
                 
-                // Show Success & Redirect
-                alert(`✅ Relato Enviado com Sucesso!\n\nProtocolo: #${newReport.id}\nNossa equipe pedagógica analisará o caso com prioridade.`);
+                alert(`✅ Relato Enviado!\n\nProtocolo: #${newReport.id}\nNossa equipe analisará o caso.`);
                 document.getElementById('report-form').reset();
                 this.router('landing');
             },
 
             // --- ADMIN LOGIC ---
             loadMockData: function() {
-                // Pre-populate with data from original code context
                 this.data.reports = [
                     { id: 101, date: '01/10/2025', student: 'João Silva', grade: '7º Ano B', reason: 'victim', location: 'playground', risk: 'high', intensity: 8, status: 'pending' },
                     { id: 102, date: '02/10/2025', student: 'Ana Oliveira', grade: '8º Ano A', reason: 'witness', location: 'corridor', risk: 'medium', intensity: 5, status: 'in-progress' },
@@ -711,9 +709,11 @@
                 document.getElementById('urgent-alert-count').textContent = `${pendingUrgent} Casos Urgentes`;
                 
                 if(pendingUrgent === 0) {
-                    document.getElementById('urgent-alert-count').parentElement.classList.replace('bg-orange-100', 'bg-green-100');
-                    document.getElementById('urgent-alert-count').parentElement.classList.replace('text-orange-700', 'text-green-700');
-                    document.getElementById('urgent-alert-count').textContent = "Tudo calmo por enquanto";
+                    const alertBox = document.getElementById('urgent-alert-count').parentElement;
+                    alertBox.classList.replace('bg-orange-100', 'bg-green-100');
+                    alertBox.classList.replace('text-orange-700', 'text-green-700');
+                    alertBox.classList.remove('animate-pulse');
+                    document.getElementById('urgent-alert-count').textContent = "Tudo calmo";
                     document.getElementById('urgent-alert-count').previousElementSibling.className = "ph ph-check-circle-fill";
                 }
             },
@@ -727,13 +727,11 @@
                 if(filter !== 'all') filteredData = filteredData.filter(r => r.risk === filter);
 
                 filteredData.forEach(r => {
-                    // Styles based on risk
                     let riskBadge = '';
                     if(r.risk === 'high') riskBadge = '<span class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-0.5 rounded border border-red-200">ALTO</span>';
                     else if(r.risk === 'medium') riskBadge = '<span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-0.5 rounded border border-orange-200">MÉDIO</span>';
                     else riskBadge = '<span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-0.5 rounded border border-green-200">BAIXO</span>';
 
-                    // Translate Reasons
                     const reasons = { 'victim': 'Vítima', 'witness': 'Testemunha', 'aggressor': 'Agressão', 'other': 'Outro' };
 
                     const row = `
@@ -746,7 +744,7 @@
                             <td class="px-6 py-4 text-slate-600">${reasons[r.reason] || r.reason}</td>
                             <td class="px-6 py-4">${riskBadge}</td>
                             <td class="px-6 py-4">
-                                <select onchange="app.changeStatus(${r.id}, this.value)" class="bg-slate-50 border border-slate-300 text-slate-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block w-full p-2">
+                                <select onchange="app.changeStatus(${r.id}, this.value)" class="bg-slate-50 border border-slate-300 text-slate-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block w-full p-2 outline-none">
                                     <option value="pending" ${r.status === 'pending' ? 'selected' : ''}>Pendente</option>
                                     <option value="in-progress" ${r.status === 'in-progress' ? 'selected' : ''}>Analisando</option>
                                     <option value="closed" ${r.status === 'closed' ? 'selected' : ''}>Fechado</option>
@@ -765,7 +763,7 @@
                 const report = this.data.reports.find(r => r.id === id);
                 if(report) {
                     report.status = newStatus;
-                    this.updateStats(); // Refresh headers
+                    this.updateStats();
                 }
             },
 
@@ -774,7 +772,6 @@
             },
 
             renderCharts: function() {
-                // Prepare Data
                 const locCounts = {};
                 const riskCounts = { 'high': 0, 'medium': 0, 'low': 0 };
 
@@ -783,7 +780,6 @@
                     riskCounts[r.risk] = (riskCounts[r.risk] || 0) + 1;
                 });
 
-                // Translate Location Labels
                 const locLabels = {
                     'classroom': 'Sala de Aula', 'playground': 'Pátio', 'bathroom': 'Banheiro', 
                     'online': 'Internet', 'transport': 'Transporte', 'corridor': 'Corredor', 'entrance': 'Entrada'
@@ -792,7 +788,6 @@
                 const locKeys = Object.keys(locCounts).map(k => locLabels[k] || k);
                 const locValues = Object.values(locCounts);
 
-                // --- CHART 1: Locations (Bar) ---
                 if(this.data.charts.location) this.data.charts.location.destroy();
                 const ctxLoc = document.getElementById('locationChart').getContext('2d');
                 this.data.charts.location = new Chart(ctxLoc, {
@@ -814,7 +809,6 @@
                     }
                 });
 
-                // --- CHART 2: Risk (Doughnut) ---
                 if(this.data.charts.risk) this.data.charts.risk.destroy();
                 const ctxRisk = document.getElementById('riskChart').getContext('2d');
                 this.data.charts.risk = new Chart(ctxRisk, {
@@ -840,7 +834,6 @@
             }
         };
 
-        // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
             app.init();
         });
